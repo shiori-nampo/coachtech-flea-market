@@ -1,0 +1,18 @@
+.product-content__tab {
+  height: 80px;
+  border: 1px solid #000;
+  display: flex;
+  align-items: flex-end;
+  padding-left: 130px;
+}
+
+.tab__item {
+  text-decoration: none;
+  color: #000;
+  font-weight: bold;
+  margin-left: 120px;
+}
+
+.active {
+  color:red;
+}

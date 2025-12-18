@@ -11,24 +11,37 @@
 <body>
   <div class="app">
     <header class="header">
-      <!--<a href="{{ route('items.index') }}">-->
+      <div class="header__inner">
+      <a href="{{ route('items.index') }}">
       <img src="{{ asset('images/logo.png') }}"/>
-      <!--</a>-->
+      </a>
 
       @auth
       <form class="search-form">
         <input class="search-form__input" type="text" name="keyword" placeholder="なにをお探しですか？">
       </form>
       <form>
-        <button class="logout__link" type="submit">ログアウト</button>
+        <button class="logout__link header__nav" type="submit">ログアウト</button>
       </form>
-      <a class="mypage__link" href="">マイページ</a>
+      <a class="mypage__link header__nav" href="">マイページ</a>
       <div class="header-sell">
-        <a class="sell__link" href="">出品</a>
+        <a class="sell__link header__nav" href="">出品</a>
       </div>
       @endauth
 
-      
+      @guest
+      @if (!Route::is('register') && !Route::is('login'))
+      <form class="search-form">
+        <input class="search-form__input" type="text" name="keyword" placeholder="なにをお探しですか？">
+      </form>
+        <a class="login__link header__nav" href="{{ route('login') }}">ログイン</a>
+        <a class="mypage__link header__nav" href="{{ route('login') }}">マイページ</a>
+      <div class="header-sell">
+      <a class="sell__link header__nav" href="{{ route('login') }}">出品</a>
+      </div>
+      @endif
+      @endguest
+    </div>
     </header>
     @yield('content')
   </div>

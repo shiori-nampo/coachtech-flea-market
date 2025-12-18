@@ -5,16 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ItemImage extends Model
+class Condition extends Model
 {
     use HasFactory;
 
-    public function item()
+    public function products()
     {
-        return $this->belongsTo(Item::class);
+        return $this->hasMany(Item::class);
     }
 
-    protected $fillable = [
-        'image_path',
-    ];
 }

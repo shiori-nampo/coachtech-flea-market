@@ -1,0 +1,45 @@
+.app {
+  height: 100%;
+}
+
+
+header {
+  background: #000;
+}
+
+.header__inner {
+  max-width: 1540px;
+  margin: 0 auto;
+  padding: 0 24px;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 60px;
+}
+
+.search-form {
+  flex: 1;
+}
+
+.search-form__input {
+  background: #fff;
+  width: 65%;
+  padding: 8px 12px;
+  border-radius: 4px;
+  margin-left: 32px;
+}
+
+.header__nav {
+  text-decoration: none;
+  color: #fff;
+}
+
+.header-sell {
+  background: #fff;
+  padding: 12px 24px;
+}
+
+.sell__link {
+  color: #000;
+}

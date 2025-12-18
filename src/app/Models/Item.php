@@ -25,9 +25,9 @@ class Item extends Model
         return $this->belongsToMany(Category::class);
     }
 
-    public function images()
+    public function condition()
     {
-        return $this->hasMany(ItemImage::class);
+        return $this->belongsTo(Condition::class);
     }
 
     public function favorites()
