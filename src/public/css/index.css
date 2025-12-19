@@ -1,3 +1,18 @@
+.product-content__inner {
+  max-width: 1540px;
+  margin: 0 auto;
+  padding: 40px 24px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+@media screen and (max-width:850px) {
+  .product-content__inner {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
 .product-content__tab {
   height: 80px;
   border: 1px solid #000;

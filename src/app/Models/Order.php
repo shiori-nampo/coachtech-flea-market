@@ -14,9 +14,9 @@ class Order extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function item()
+    public function product()
     {
-        return $this->belongsTo(Item::class);
+        return $this->belongsTo(Product::class);
     }
 
     public function paymentMethod()

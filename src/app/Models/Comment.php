@@ -9,9 +9,9 @@ class Comment extends Model
 {
     use HasFactory;
 
-    public function item()
+    public function product()
     {
-        return $this->belongsTo(Item::class);
+        return $this->belongsTo(Product::class);
     }
 
     public function user()
