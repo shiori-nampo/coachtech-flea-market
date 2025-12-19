@@ -21,3 +21,7 @@ Route::get('/products/{product}',[ProductController::class,'show'])->name('items
 Route::get('/register',function() {
     return view('auth.register');
 })->name('auth.register');
+
+Route::get('/login',function() {
+    return view('auth.login');
+})->name('auth.login');

@@ -34,10 +34,10 @@
       <form class="search-form">
         <input class="search-form__input" type="text" name="keyword" placeholder="なにをお探しですか？">
       </form>
-        <a class="login__link header__nav" href="{{ route('login') }}">ログイン</a>
-        <a class="mypage__link header__nav" href="{{ route('login') }}">マイページ</a>
+        <a class="login__link header__nav" href="{{ route('auth.login') }}">ログイン</a>
+        <a class="mypage__link header__nav" href="{{ route('auth.login') }}">マイページ</a>
       <div class="header-sell">
-      <a class="sell__link header__nav" href="{{ route('login') }}">出品</a>
+      <a class="sell__link header__nav" href="{{ route('auth.login') }}">出品</a>
       </div>
       @endguest
       @endif
