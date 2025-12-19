@@ -17,3 +17,7 @@ use App\Http\Controllers\ProductController;
 Route::get('/',[ProductController::class,'index'])->name('items.index');
 
 Route::get('/products/{product}',[ProductController::class,'show'])->name('items.detail');
+
+Route::get('/register',function() {
+    return view('auth.register');
+})->name('auth.register');

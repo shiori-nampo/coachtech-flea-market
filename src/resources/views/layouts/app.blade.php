@@ -16,6 +16,7 @@
       <img src="{{ asset('images/logo.png') }}"/>
       </a>
 
+      @if (!Route::is('register') && !Route::is('login'))
       @auth
       <form class="search-form">
         <input class="search-form__input" type="text" name="keyword" placeholder="なにをお探しですか？">
@@ -30,7 +31,6 @@
       @endauth
 
       @guest
-      @if (!Route::is('register') && !Route::is('login'))
       <form class="search-form">
         <input class="search-form__input" type="text" name="keyword" placeholder="なにをお探しですか？">
       </form>
@@ -39,8 +39,8 @@
       <div class="header-sell">
       <a class="sell__link header__nav" href="{{ route('login') }}">出品</a>
       </div>
-      @endif
       @endguest
+      @endif
     </div>
     </header>
     @yield('content')
