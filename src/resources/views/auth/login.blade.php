@@ -9,23 +9,28 @@
 <div class="login-form">
   <h1 class="login-form__heading">ログイン</h1>
   <div class="login-form__inner">
-    <form class="login-form__form">
+    <form class="login-form__form" action="/login" method="post">
+      @csrf
       <div class="login-form__group">
         <label class="login-form__label" for="email">メールアドレス</label>
-        <input class="login-form__input" type="email" name="email" id="email">
+        <input class="login-form__input" type="email" name="email" id="email" value="{{ old('email') }}">
         <p class="login-form__error">
-
+        @error('email')
+        {{ $message }}
+        @enderror
         </p>
       </div>
       <div class="login-form__group">
         <label class="login-form__label" for="password">パスワード</label>
         <input class="login-form__input" type="password" name="password" id="password">
         <p class="login-form__error">
-
+        @error('password')
+        {{ $message }}
+        @enderror
         </p>
       </div>
       <button class="login-form__btn" type="submit">ログインする</button>
-      <a class="login-form__link">会員登録はこちら</a>
+      <a class="login-form__link" href="{{ route('register') }}">会員登録はこちら</a>
     </form>
   </div>
 </div>
