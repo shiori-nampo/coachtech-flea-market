@@ -43,7 +43,7 @@
         <input class="register-form__input" type="password" name="password_confirmation" id="password_confirmation">
       </div>
       <button class="register-form__btn" type="submit">登録する</button>
-      <a class="register-form__link" href="{[ route('login') }}">ログインはこちら</a>
+      <a class="register-form__link" href="{{ route('login') }}">ログインはこちら</a>
     </form>
   </div>
 </div>

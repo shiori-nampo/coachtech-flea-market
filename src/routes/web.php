@@ -25,8 +25,3 @@ Route::get('/register',function() {
 Route::get('/login',function() {
     return view('auth.login');
 })->name('login');
-
-
-Route::get('/auth-check',function() {
-    return 'ログイン成功';
-})->middleware('auth');
