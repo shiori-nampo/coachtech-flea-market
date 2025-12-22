@@ -22,3 +22,6 @@ Route::get('/products/{product}',[ProductController::class,'show'])->name('items
 Route::get('/my-profile/edit', function() {
     return 'profile edit page';
 })->name('profile.edit')->middleware('auth');
+
+
+Route::post('/products/{product}/favorite',[ProductController::class,'toggleFavorite'])->name('products.toggleFavorite');

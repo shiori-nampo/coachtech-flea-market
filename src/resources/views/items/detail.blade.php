@@ -14,13 +14,16 @@
       <p class="detail-items__brand">{{ $product->brand }}</p>
       <p class="detail-items__price">¥{{ number_format($product->price) }}</p>
       <div class="detail-icons">
-      <div class="icon-box heart">
-      <img src="{{ asset('images/heart_logo.png') }}" alt="いいね">
-      <span></span>
-      </div>
+      <form action="{{ route('products.toggleFavorite',$product) }}" method="post">
+        @csrf
+      <button class="icon-box heart" type="submit">
+      <img src="{{ $product->favorites->contains('user_id',auth()->id()) ? asset('images/heart_pink.png') : asset('images/heart_logo.png') }}" alt="いいね">
+      <span>{{ $product->favorites->count() }}</span>
+      </button>
+      </form>
       <div class="icon-box comment">
       <img src="{{ asset('images/comment_logo.png') }}" alt="コメント">
-      <span></span>
+      <span>{{ $product->comments->count() }}</span>
       </div>
     </div>
       <a class="purchase__link" href="">購入手続きへ</a>
