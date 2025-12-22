@@ -11,7 +11,8 @@ use Illuminate\Support\ServiceProvider;
 use Laravel\Fortify\Fortify;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
-use App\Http\Requests\LoginRequest;
+use Laravel\Fortify\Http\Requests\LoginRequest as FortifyLoginRequest;
+use App\Http\Requests\LoginRequest as MyCustomLoginRequest;
 use App\Http\Responses\RegisterResponse;
 use Laravel\Fortify\Contracts\RegisterResponse as RegisterResponseContract;
 
@@ -26,6 +27,11 @@ class FortifyServiceProvider extends ServiceProvider
         $this->app->singleton(
             RegisterResponseContract::class,
             RegisterResponse::class
+        );
+
+        $this->app->singleton(
+            FortifyLoginRequest::class,
+            MyCustomLoginRequest::class
         );
     }
 

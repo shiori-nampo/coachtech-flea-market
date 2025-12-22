@@ -18,8 +18,10 @@
 
       @if (!Route::is('register') && !Route::is('login'))
       @auth
-      <form class="search-form">
+      <form class="search-form" action="{{ route('items.index') }}" method="get">
+        @csrf
         <input class="search-form__input" type="text" name="keyword" placeholder="なにをお探しですか？">
+        <input type="hidden" name="tab" value="{{ request('tab') }}">
       </form>
       <form action="/logout" method="post">
         @csrf
@@ -32,8 +34,10 @@
       @endauth
 
       @guest
-      <form class="search-form">
+      <form class="search-form" action="{{ route('items.index') }}" method="get">
+        @csrf
         <input class="search-form__input" type="text" name="keyword" placeholder="なにをお探しですか？">
+        <input type="hidden" name="tab" value="{{ request('tab') }}">
       </form>
         <a class="login__link header__nav" href="{{ route('login') }}">ログイン</a>
         <a class="mypage__link header__nav" href="{{ route('login') }}">マイページ</a>
