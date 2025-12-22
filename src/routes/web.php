@@ -18,10 +18,15 @@ Route::get('/',[ProductController::class,'index'])->name('items.index');
 
 Route::get('/products/{product}',[ProductController::class,'show'])->name('items.detail');
 
-Route::get('/register',function() {
-    return view('auth.register');
-})->name('register');
+//Route::get('/register',function() {
+    //return view('auth.register');
+//})->name('register');
 
-Route::get('/login',function() {
-    return view('auth.login');
-})->name('login');
+//Route::get('/login',function() {
+    //return view('auth.login');
+//})->name('login');
+
+
+Route::get('/my-profile/edit', function() {
+    return 'profile edit page';
+})->name('profile.edit')->middleware('auth');

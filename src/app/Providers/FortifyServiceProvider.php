@@ -12,6 +12,8 @@ use Laravel\Fortify\Fortify;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 use App\Http\Requests\LoginRequest;
+use App\Http\Responses\RegisterResponse;
+use Laravel\Fortify\Contracts\RegisterResponse as RegisterResponseContract;
 
 
 class FortifyServiceProvider extends ServiceProvider
@@ -21,7 +23,10 @@ class FortifyServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        $this->app->singleton(
+            RegisterResponseContract::class,
+            RegisterResponse::class
+        );
     }
 
     /**
@@ -30,7 +35,6 @@ class FortifyServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Fortify::createUsersUsing(CreateNewUser::class);
-        Fortify::updateUserProfileInformationUsing(UpdateUserProfileInformation::class);
 
 
         Fortify::registerView(function () {
@@ -56,7 +60,8 @@ class FortifyServiceProvider extends ServiceProvider
         throw ValidationException::withMessages([
             'email' => 'ログイン情報が登録されていません',
         ]);
-    });
+        });
+
 
 
     // TODO: 初回ログイン後プロフィール編集実装時に使用
