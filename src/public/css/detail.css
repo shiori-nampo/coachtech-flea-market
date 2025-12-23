@@ -58,10 +58,21 @@
   font-weight: bold;
 }
 
-.detail-price,
+.detail-items__prices {
+  display: flex;
+  flex: flex-start;
+  align-items: baseline;
+}
+
+.detail-items__yen {
+  font-size:18px;
+  align-items: center;
+}
+
+.detail-items__price,
 .section-title {
-  font-size: 18px;
-  font-weight: bold;
+  font-size: 24px;
+  align-items: center;
 }
 
 .purchase__link {
@@ -162,3 +173,4 @@
   padding: 12px 0;
   margin-bottom: 26px;
 }
+

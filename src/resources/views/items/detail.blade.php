@@ -12,7 +12,11 @@
     <div class="detail-items">
       <h1 class="detail-items__name">{{ $product->name }}</h1>
       <p class="detail-items__brand">{{ $product->brand }}</p>
-      <p class="detail-items__price">¥{{ number_format($product->price) }}</p>
+      <div class="detail-items__prices">
+      <span class="detail-items__yen">
+        ¥</span>
+      <p class="detail-items__price">{{ number_format($product->price) }}</p>
+      </div>
       <div class="detail-icons">
       <form action="{{ route('products.toggleFavorite',$product) }}" method="post">
         @csrf

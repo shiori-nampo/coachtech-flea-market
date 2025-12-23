@@ -36,12 +36,6 @@
 .purchase-product__name {
   font-size: 24px;
   margin-bottom: 8px;
-  margin-left: 20px;
-}
-
-.purchase-product__price {
-  font-size: 20px;
-  margin-left: 20px;
 }
 
 .purchase-title {
@@ -93,7 +87,6 @@
 }
 
 .purchase-payment__info {
-  padding: 24px;
   background:#fff;
 }
 
@@ -131,4 +124,27 @@
 
 .purchase-btn:hover {
   opacity: 0.9;
+}
+
+.purchase-product__prices,
+.purchase-product__price {
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  gap: 4px;
+  font-size: 24px;
+  
+}
+
+.purchase-product__yen {
+  font-size:18px;
+  margin-left: -50px;
+}
+
+.payment-info__text {
+  font-size: 18px;
+  font-weight:bold;
+}
+.purchase-product__info {
+  margin-left: 20px;
 }

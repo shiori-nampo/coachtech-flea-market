@@ -13,7 +13,9 @@ class PurchaseController extends Controller
     {
         $paymentMethods = PaymentMethod::all();
 
-        return view('purchase.purchase',compact('product','paymentMethods'));
+        $defaultPaymentMethod = $paymentMethods->firstWhere('code','convenience');
+
+        return view('purchase.purchase',compact('product','paymentMethods','defaultPaymentMethod'));
     }
 
     public function store(Request $request,Product $product)
