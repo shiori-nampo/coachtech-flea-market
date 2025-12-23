@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\PurchaseController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,3 +29,8 @@ Route::get('/my-profile/edit', function() {
 Route::post('/products/{product}/favorite',[ProductController::class,'toggleFavorite'])->name('products.toggleFavorite');
 
 Route::post('/products/{product}/comments',[CommentController::class,'store'])->name('comments.store')->middleware('auth');
+
+
+Route::get('/purchase/{product}', [PurchaseController::class,'show'])->name('purchase');
+
+Route::post('/purchase/{product}',[PurchaseController::class,'store'])->name('purchase.store');
