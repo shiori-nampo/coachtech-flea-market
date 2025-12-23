@@ -33,7 +33,7 @@ class ProductController extends Controller
             }
 
             $products = $query->get();
-            return view('items.index',compact('products'));
+            return view('items.index',compact('products','tab','keyword'));
         }
 
 

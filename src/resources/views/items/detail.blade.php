@@ -26,13 +26,13 @@
       <span>{{ $product->comments->count() }}</span>
       </div>
     </div>
-      <a class="purchase__link" href="">購入手続きへ</a>
+      <a class="purchase__link" href="{{ route('purchase.purchase') }}">購入手続きへ</a>
       <h2 class="section-title">商品説明</h2>
       <p class="description-text">{{ $product->description }}</p>
       <h3 class="section-title">商品の情報</h3>
       <div class="product-info">
         <div class="product-info__row">
-          <span class="product-info-label">カテゴリー</span>
+          <span class="product-info__label">カテゴリー</span>
           <div class="category-list">
             @foreach($product->categories as $category)
             <span class="info-label">{{ $category->name }}</span>
@@ -40,22 +40,32 @@
           </div>
         </div>
         <div class="product-info__row">
-          <span class="inf-label">商品の状態</span>
+          <span class="product-info__label">商品の状態</span>
           <span class="condition-text">{{ $product->condition->name }}</span>
         </div>
+      </div>
+      <div class="product-info__row">
+        <span class="comments-count">コメント({{ $product->comments->count() }})
+        </span>
       </div>
       @foreach($product->comments as $comment)
       <div class="comment">
         <div class="comment-user">
           <img src="{{ $comment->user->profile_image ?? asset('images/default_user.png') }}" alt="{{ $comment->user->name }}">
-          <span>{{ $comment->user->name }}</span>
+          <span class="comment-user__name">{{ $comment->user->name }}</span>
         </div>
-        <p class="comment-text">{{ $comment->body }}</p>
+
+        <p class="comment-text">{{ $comment->content }}</p>
       </div>
       @endforeach
+      <div class="comments">
       <h3 class="comment-title">商品へのコメント</h3>
-      <textarea class="comment-input"></textarea>
-      <button class="comment-submit">コメントを送信する</button>
+      <form class="comment-form" action="{{ route('comments.store', $product) }}" method="post">
+        @csrf
+      <textarea class="comment-input" name="content">{{ old('content') }}</textarea>
+      <button class="comment-submit" type="submit">コメントを送信する</button>
+      </form>
+      </div>
     </div>
   </div>
 </div>

@@ -8,8 +8,8 @@
 @section('content')
 <div class="product-content">
   <div class="product-content__tab">
-    <a href="/?tab=recommend" class=" tab__item {{ request('tab') !== 'mylist' ? 'active' : '' }}">おすすめ</a>
-    <a href="/?tab=mylist" class="tab__item mylist {{ request('tab') === 'mylist' ? 'active' : '' }}">マイリスト</a>
+    <a href="{{ route('items.index', ['tab' => 'all', 'keyword' => request('keyword')]) }}" class=" tab__item {{ request('tab') != 'mylist' ? 'active' : '' }}">おすすめ</a>
+    <a href="{{ route('items.index',['tab' => 'mylist', 'keyword' => request('keyword')]) }}" class="tab__item {{ request('tab') == 'mylist' ? 'active' : '' }}">マイリスト</a>
   </div>
   <div class="product-content__inner">
     @foreach ($products as $product)
