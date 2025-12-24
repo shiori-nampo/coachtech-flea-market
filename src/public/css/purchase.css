@@ -1,0 +1,134 @@
+.purchase-form {
+  max-width: 1540px;
+  margin: 40px auto;
+}
+
+.purchase-content {
+  display: flex;
+  gap: 40px;
+  margin: 90px 30px;
+}
+
+.purchase-left {
+  flex: 2;
+}
+
+.purchase-right {
+  flex: 1;
+}
+
+.purchase-section {
+  border-bottom: 1px solid #ccc;
+}
+
+.purchase-section--product {
+  display: flex;
+  gap: 20px;
+}
+
+.purchase-product__image {
+  width: 180px;
+  height: 180px;
+  object-fit: cover;
+  margin-bottom: 50px;
+}
+
+.purchase-product__name {
+  font-size: 24px;
+  margin-bottom: 8px;
+  margin-left: 20px;
+}
+
+.purchase-product__price {
+  font-size: 20px;
+  margin-left: 20px;
+}
+
+.purchase-title {
+  font-size: 16px;
+  margin: 20px 0 30px 20px;
+}
+
+.purchase-payment__select-wrapper {
+  position: relative;
+  width: 40%;
+  margin-left: 50px;
+  margin-bottom: 50px;
+}
+
+.purchase-payment__select {
+  width: 100%;
+  margin-left: 25px;
+  margin-bottom: 50px;
+  border-radius: 3px;
+  font-size: 12px;
+  border: 1px solid #83868C;
+  padding: 5px 2px;
+
+}
+
+.purchase-payment__select-wrapper::after {
+  position: absolute;
+    top: 15px;
+    right: -20px;
+    width: 0;
+    height: 0;
+    border-top: 6px solid #83868C;
+    border-right: 5px solid transparent;
+    border-left: 5px solid transparent;
+    content: "";
+    transform: translateY(-50%);
+    pointer-events: none;
+}
+
+.purchase-address__header {
+  display: flex;
+  justify-content: space-between;
+}
+.purchase-address__link {
+  font-size: 14px;
+  color: #007bff;
+  text-decoration: none;
+  margin-top: 20px;
+}
+
+.purchase-payment__info {
+  padding: 24px;
+  background:#fff;
+}
+
+.payment-info__inner {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 32px;
+  border:  1px solid #000;
+}
+
+.payment-info__row th,
+.payment-info__row td {
+  padding: 20px 0;
+  font-size: 18px;
+  font-weight: lighter;
+  text-align: center;
+  border-bottom: 1px solid #000;
+}
+
+.payment-info__header {
+  color: #555;
+}
+
+.purchase-btn {
+  width: 100%;
+  padding: 7px 0px;
+  background: #EB666E;
+  border-radius: 4px;
+  color: #fff;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  margin-top: 30px;
+}
+
+.purchase-btn:hover {
+  opacity: 0.9;
+}

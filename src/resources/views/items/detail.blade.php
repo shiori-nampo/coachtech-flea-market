@@ -26,7 +26,7 @@
       <span>{{ $product->comments->count() }}</span>
       </div>
     </div>
-      <a class="purchase__link" href="{{ route('purchase.purchase') }}">購入手続きへ</a>
+      <a class="purchase__link" href="{{ route('purchase',$product ) }}">購入手続きへ</a>
       <h2 class="section-title">商品説明</h2>
       <p class="description-text">{{ $product->description }}</p>
       <h3 class="section-title">商品の情報</h3>
