@@ -8,26 +8,35 @@ use App\Models\Product;
 use App\Models\Order;
 use Stripe\Stripe;
 use Stripe\Checkout\Session;
+use App\Http\Requests\PurchaseRequest;
+use App\Http\Requests\AddressRequest;
+use Illuminate\Support\Facades\Auth;
 
 class PurchaseController extends Controller
 {
     public function show(Product $product)
     {
+        $user = Auth::user();
+
         $paymentMethods = PaymentMethod::all();
 
         $defaultPaymentMethod = $paymentMethods->firstWhere('code','convenience');
 
-        return view('purchase.purchase',compact('product','paymentMethods','defaultPaymentMethod'));
+        return view('purchase.purchase',compact('product','paymentMethods','defaultPaymentMethod','user'));
     }
 
     public function store(Request $request,Product $product)
     {
+        $user = Auth::user();
 
         Order::create([
-            'user_id' => auth()->id(),
+            'user_id' => $user->id,
             'product_id' => $product->id,
             'payment_method_id' => $request->payment_method_id,
             'price' => $product->price,
+            'postal_code' => $user->postal_code,
+            'address' => $user->address,
+            'building' => $user->building,
         ]);
 
         $product->update([
@@ -58,6 +67,25 @@ class PurchaseController extends Controller
             return redirect($session->url);
         }
             return redirect()->route('items.index');
+    }
+
+    public function showAddressForm(Product $product)
+    {
+        $user = Auth::user();
+        return view('purchase.address',compact('product','user'));
+    }
+
+    public function updateAddress(Request $request, Product $product)
+    {
+        $user = Auth::user();
+        $user->update([
+            'postal_code' => $request->postal_code,
+            'address' => $request->address,
+            'building' => $request->building,
+        ]);
+
+        return redirect()->route('purchase.show',$product->id)
+                        ->with('success','住所を更新しました');
     }
 
 }

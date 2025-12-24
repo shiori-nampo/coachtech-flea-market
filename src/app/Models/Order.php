@@ -25,6 +25,9 @@ class Order extends Model
     }
 
     protected $fillable = [
+        'user_id',
+        'product_id',
+        'payment_method_id',
         'postal_code',
         'address',
         'building',

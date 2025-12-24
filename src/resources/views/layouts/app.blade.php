@@ -49,6 +49,7 @@
     </div>
     </header>
     @yield('content')
+    @yield('js')
   </div>
 </body>
 </html>

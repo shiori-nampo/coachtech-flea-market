@@ -36,7 +36,8 @@ Route::get('/purchase/{product}', [PurchaseController::class,'show'])->name('pur
 Route::post('/purchase/{product}',[PurchaseController::class,'store'])->name('purchase.store');
 
 
-Route::get('/address',function()
-{
-    return view('purchase.address');
-})->name('purchase.address');
+Route::get('/purchase/{product}/address',[PurchaseController::class,'showAddressForm'])
+->name('purchase.address');
+
+Route::post('/purchase/{product}/address',[PurchaseController::class,'updateAddress'])
+->name('purchase.address.update');

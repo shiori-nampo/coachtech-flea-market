@@ -39,9 +39,22 @@
   margin-left: 20px;
 }
 
+.purchase-product__prices {
+  display: flex;
+  align-items: baseline;
+}
+
 .purchase-product__price {
   font-size: 20px;
-  margin-left: 20px;
+  margin-left: 3px;
+}
+
+.payment-info__amount {
+  font-size: 20px;
+}
+
+.purchase-product__yen, .payment-info__yen {
+  font-size: 16px;
 }
 
 .purchase-title {
@@ -59,7 +72,7 @@
 .purchase-payment__select {
   width: 100%;
   margin-left: 25px;
-  margin-bottom: 50px;
+  margin-bottom: 40px;
   border-radius: 3px;
   font-size: 12px;
   border: 1px solid #83868C;
@@ -131,4 +144,28 @@
 
 .purchase-btn:hover {
   opacity: 0.9;
+}
+
+.purchase-addresses {
+  margin-left: 40px;
+  margin-bottom: 5px;
+  font-size: 18px;
+  display: flex;
+  flex-direction: flex-start;
+}
+
+.purchase-address__row {
+  align-items: center;
+  gap: 6px;
+}
+
+.purchase-address__post, .purchase-address__postal-code {
+  font-weight: bold;
+}
+
+.purchase-address__address {
+  margin-top: 6px;
+  margin-left: 40px;
+  margin-bottom: 40px;
+  font-weight: bold;
 }
