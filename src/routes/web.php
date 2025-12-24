@@ -31,6 +31,12 @@ Route::post('/products/{product}/favorite',[ProductController::class,'toggleFavo
 Route::post('/products/{product}/comments',[CommentController::class,'store'])->name('comments.store')->middleware('auth');
 
 
-Route::get('/purchase/{product}', [PurchaseController::class,'show'])->name('purchase');
+Route::get('/purchase/{product}', [PurchaseController::class,'show'])->name('purchase.show');
 
 Route::post('/purchase/{product}',[PurchaseController::class,'store'])->name('purchase.store');
+
+
+Route::get('/address',function()
+{
+    return view('purchase.address');
+})->name('purchase.address');
