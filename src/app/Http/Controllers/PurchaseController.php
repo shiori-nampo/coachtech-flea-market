@@ -12,8 +12,8 @@ use App\Http\Requests\PurchaseRequest;
 use App\Http\Requests\AddressRequest;
 use Illuminate\Support\Facades\Auth;
 
-class PurchaseController extends Controller
-{
+    class PurchaseController extends Controller
+    {
     public function show(Product $product)
     {
         $user = Auth::user();
@@ -29,19 +29,9 @@ class PurchaseController extends Controller
     {
         $user = Auth::user();
 
-        Order::create([
-            'user_id' => $user->id,
-            'product_id' => $product->id,
-            'payment_method_id' => $request->payment_method_id,
-            'price' => $product->price,
-            'postal_code' => $user->postal_code,
-            'address' => $user->address,
-            'building' => $user->building,
-        ]);
-
-        $product->update([
-            'status' => 'sold',
-        ]);
+        if ($product->status === 'sold') {
+            return redirect()->back()->with('error','この商品はすでに購入されています');
+        }
 
 
         if ($request->payment_method_id == 2) {
@@ -64,8 +54,29 @@ class PurchaseController extends Controller
             'cancel_url' => route('purchase.show',$product),
             ]);
 
+            $product->update([
+            'status' => 'sold',
+        ]);
+
             return redirect($session->url);
         }
+
+        Order::create([
+            'user_id' => $user->id,
+            'product_id' => $product->id,
+            'payment_method_id' => $request->payment_method_id,
+            'price' => $product->price,
+            'postal_code' => $user->postal_code,
+            'address' => $user->address,
+            'building' => $user->building,
+        ]);
+        
+        $product->update([
+            'status' => 'sold',
+        ]);
+
+        \Log::info('Product updated',['id' => $product->id, 'status' => $product->status]);
+
             return redirect()->route('items.index');
     }
 

@@ -2,6 +2,17 @@
 
 @section('css')
 <link rel="stylesheet" href="{{ asset('css/index.css') }}"/>
+<style>
+.sold-badge {
+  display: inline-block;
+  background: red;
+  color: #fff;
+  font-weight: bold;
+  padding: 2px 6px;
+  border-radius: 4px;
+  margin-top: 5px;
+}
+</style>
 @endsection
 
 
@@ -15,12 +26,13 @@
     @foreach ($products as $product)
     <div class="product-group">
       <a href="{{route('items.detail', $product->id) }}">
-      <img class="product-group__image"
+        <img class="product-group__image"
           src="{{ $product->image }}" alt="{{ $product->name }}">
-      <p class="product-group__name">{{ $product->name }}</p>
+        <p class="product-group__name">{{ $product->name }}</p>
       </a>
+      <p>{{ $product->status }}</p>
       @if($product->status === 'sold')
-      <span class="sold-badge">SOLD</span>
+      <span class="sold-badge">sold</span>
       @endif
     </div>
     @endforeach

@@ -1,32 +1,33 @@
-/node_modules
-/public/hot
-/public/storage
-/storage/*.key
-/vendor
-.env
-.env.backup
-.phpunit.result.cache
+/src/node_modules
+/src/public/hot
+/src/public/storage
+/src/storage/*.key
+/src/vendor
+/src/.env
+/src/.env.backup
+/src/.phpunit.result.cache
+
+# Laravel 標準
+/src/*.log
+/src/storage/framework/cache/data/
+/src/storage/logs/
+
+# Docker 関連（コンテナ・MySQL データなど）
 docker-compose.override.yml
 Homestead.json
 Homestead.yaml
-npm-debug.log
-yarn-error.log
-/.idea
-/.vscode
-# Laravel 標準
-/*.log
-/storage/framework/cache/data/
-/storage/logs/
-
-# Docker 関連（コンテナ・MySQL データなど）
 docker/mysql/data/
 docker/nginx/logs/
 docker/php/logs/
 
 # macOS 系
 .DS_Store
+npm-debug.log
+yarn-error.log
+/.idea
+/.vscode
 
 # Composer
-/composer.lock
+/src/composer.lock
 
 *.sqlite*

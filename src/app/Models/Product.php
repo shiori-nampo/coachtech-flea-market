@@ -46,5 +46,6 @@ class Product extends Model
         'description',
         'price',
         'condition',
+        'status',
     ];
 }

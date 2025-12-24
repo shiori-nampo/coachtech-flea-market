@@ -25,8 +25,8 @@ class ProductController extends Controller
             });
 
         } else {
-            $query->where('user_id', '!=', auth()->id() ?? 0)
-                ->where('status','!=','sold');
+            $query->where('user_id', '!=', auth()->id() ?? 0);
+                //->where('status','!=','sold');
         }
             if ($keyword) {
                 $query->where('name','like',"%{$keyword}%");
