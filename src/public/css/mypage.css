@@ -1,0 +1,92 @@
+.mypage-content {
+  max-width: 1540px;
+  margin: 0 auto;
+}
+
+.mypage-content__header {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  justify-content: space-between;
+  margin: 50px 100px 30px 120px;
+}
+
+.mypage-content__user {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.mypage-content__image {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: #ddd;
+  margin-right: 50px;
+  margin-left: 180px;
+}
+
+.mypage-content__name {
+  font-size: 32px;
+  font-weight: bold;
+}
+
+.mypage-content__link {
+  margin-right: 80px;
+  padding: 6px 26px;
+  border: 1.5px solid #F65861;
+  color: #F65861;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+@media (max-width: 850px) {
+  .mypage-content__header {
+    margin: 40px 20px;
+    gap: 16px;
+  }
+
+  .mypage-content__image {
+    width: 80px;
+    height: 80px;
+  }
+
+  .mypage-content__name {
+    font-size: 22px;
+  }
+
+  .mypage-content__link {
+    padding: 4px 16px;
+    font-size: 14px;
+  }
+}
+
+.mypage-content__tabs {
+  border-bottom: 1px solid #000;
+  margin-top: 60px;
+}
+
+.mypage-content__tab {
+  display: flex;
+  gap: 40px;
+  text-decoration: none;
+  margin-left: 140px;
+  gap: 60px;
+  font-size: 20px;
+  
+}
+
+.mypage-content__tab a {
+  padding-bottom: 10px;
+  font-weight: bold;
+  text-decoration: none;
+  color: #666771;
+}
+
+.mypage-content__tab .active {
+  color: #F65861;
+  text-decoration: none;
+}

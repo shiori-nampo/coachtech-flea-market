@@ -6,9 +6,23 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use App\Models\Product;
 
 class ProfileController extends Controller
 {
+    public function mypage()
+    {
+        $user = Auth::user();
+
+        $products = Product::where('user_id', $user->id)->get();
+
+        return view('profile.mypage',compact('user','products'));
+    }
+
+
+
+
+
     public function mypageProfile()
     {
         $user = Auth::user();

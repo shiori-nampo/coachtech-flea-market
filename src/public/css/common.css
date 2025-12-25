@@ -1,5 +1,7 @@
 .app {
   height: 100%;
+  max-width:1540px;
+  margin: 0 auto;
 }
 
 
@@ -51,6 +53,7 @@ header {
   background: #fff;
   padding: 12px 24px;
   flex-shrink: 0;
+  border-radius: 3px;
 }
 
 @media (max-width: 850px) {

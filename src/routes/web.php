@@ -39,6 +39,9 @@ Route::middleware('auth')->group(function () {
     Route::post('/purchase/{product}/address',[PurchaseController::class,'updateAddress'])
     ->name('purchase.address.update');
 
+    Route::get('/mypage',[ProfileController::class,'mypage'])
+    ->name('mypage');
+
     Route::get('/mypage/profile',[ProfileController::class,'mypageProfile'])
     ->name('profile.edit');
 
