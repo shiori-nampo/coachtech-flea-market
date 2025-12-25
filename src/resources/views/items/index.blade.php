@@ -30,7 +30,6 @@
           src="{{ $product->image }}" alt="{{ $product->name }}">
         <p class="product-group__name">{{ $product->name }}</p>
       </a>
-      <p>{{ $product->status }}</p>
       @if($product->status === 'sold')
       <span class="sold-badge">sold</span>
       @endif
