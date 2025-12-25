@@ -27,7 +27,7 @@
         @csrf
         <button class="logout__link header__nav" type="submit">ログアウト</button>
       </form>
-      <a class="mypage__link header__nav" href="">マイページ</a>
+      <a class="mypage__link header__nav" href="{{ route('mypage') }}">マイページ</a>
       <div class="header-sell">
         <a class="sell__link header__nav" href="">出品</a>
       </div>

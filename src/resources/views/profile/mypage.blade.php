@@ -22,7 +22,7 @@
     </div>
   </div>
   <div class="mypage-content__tab-inner">
-    @foreach ($products as $product)
+    @forelse ($products as $product)
     <div class="mypage-content__group">
       <a href="{{route('items.detail', $product->id) }}">
         <img class="mypage-content__group-image"
@@ -30,7 +30,8 @@
         <p class="mypage-content__group-name">{{ $product->name }}</p>
       </a>
     </div>
-    @endforeach
+    @empty
+    @endforelse
   </div>
 </div>
 @endsection

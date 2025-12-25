@@ -76,7 +76,6 @@
   margin-left: 140px;
   gap: 60px;
   font-size: 20px;
-  
 }
 
 .mypage-content__tab a {
@@ -88,5 +87,39 @@
 
 .mypage-content__tab .active {
   color: #F65861;
+  text-decoration: none;
+}
+
+.mypage-content__tab-inner {
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  gap: 24px;
+  padding: 40px 120px;
+}
+
+@media (max-width: 850px) {
+  .mypage-content__tab-inner {
+    grid-template-columns: repeat(2,1fr);
+    padding: 20px;
+  }
+}
+.mypage-content__group {
+  display: flex;
+  flex-direction: column;
+}
+
+.mypage-content__group-image {
+  width: 100%;
+  aspect-ratio: 1/1;
+  object-fit: cover;
+}
+
+.mypage-content__group-name {
+  margin-top: 8px;
+  font-size: 14px;
+  color:#000;
+}
+
+.mypage-content__group a {
   text-decoration: none;
 }

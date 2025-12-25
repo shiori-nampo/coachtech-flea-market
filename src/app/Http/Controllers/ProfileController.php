@@ -7,18 +7,25 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Product;
+use App\Models\Order;
 
 class ProfileController extends Controller
 {
-    public function mypage()
+    public function mypage(Request $request)
     {
         $user = Auth::user();
+        $tab = $request->query('tab','sell');
 
-        $products = Product::where('user_id', $user->id)->get();
+        if ($tab === 'buy') {
+            $products = Product::whereHas('order',function($q) use ($user) {
+                $q->where('user_id',$user->id);
+            })->get();
+        }else {
+            $products = Product::where('user_id',$user->id)->get();
+        }
+        return view('profile.mypage',compact('user','products','tab'));
 
-        return view('profile.mypage',compact('user','products'));
     }
-
 
 
 
@@ -33,7 +40,7 @@ class ProfileController extends Controller
     {
         $user = Auth::user();
 
-        if ($equest->hasFile('image')) {
+        if ($request->hasFile('image')) {
             $path = $request->file('image')->store('profiles','public');
             $user->image = $path;
         }
