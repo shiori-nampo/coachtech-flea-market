@@ -50,6 +50,10 @@ Route::middleware('auth')->group(function () {
 });
 
 
+Route::get('/sell',function() {
+    return view('items.sell');
+})->name('items.sell');
+
 
 
 

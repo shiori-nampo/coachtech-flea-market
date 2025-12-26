@@ -1,0 +1,99 @@
+.sell-form {
+  text-align: center;
+  max-width: 1540px;
+  margin: 0 auto;
+}
+
+.sell-form__inner {
+  width: 100%;
+}
+
+.sell-form__form {
+  width: 50%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.sell-section {
+  margin-bottom: 32px;
+}
+
+.sell-form__title {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 16px;
+  margin-top: 40px;
+}
+
+.sell-section__title {
+  text-align: left;
+  font-size: 18px;
+  margin-bottom: 3px;
+}
+
+.sell-section__header {
+  border-bottom: 1px solid #000;
+  padding-bottom: 8px;
+  font-size: 22px;
+  color: #666771;
+  text-align: left;
+}
+
+.sell-image__box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 120px;
+  border: 1px dashed #000;
+  cursor: pointer;
+}
+
+.sell-image__btn {
+  color: #F65861;;
+  border: 1.5px solid #F65861;
+  border-radius: 4px;
+  padding: 5px 15px;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.sell-field__label {
+  font-weight: bold;
+  text-align: left;
+  margin-top: 20px;
+  margin-bottom: 30px;
+  font-size: 18px;
+}
+
+.sell-category {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.sell-category__item {
+  padding: 4px 14px;
+  border: 1.5px solid #F65861;
+  border-radius: 999px;
+  background: #fff;
+  color: #F65861;
+  cursor: pointer;
+  font-size: 10px;
+}
+
+.sell-category__item.is-active {
+  background: #F65861;
+  color: #fff;
+}
+
+.sell-price {
+  display: flex;
+  align-items: center;
+  border: 1px solid #000;
+  padding: 8px;
+}
+
+.sell-price__yen {
+  margin-right: 8px;
+}
