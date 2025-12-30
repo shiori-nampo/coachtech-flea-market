@@ -23,17 +23,39 @@ class PurchaseRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            'payment_method_id' => ['required', 'exists:payment_methods,id'],
-            'address_id' => ['required','exists:addresses,id'],
-        ];
+        return [];
     }
 
-    public function messages()
+    public function withValidator($validator)
     {
-        return [
-            'payment_method_id.required' => '支払い方法を選択してください',
-            'address_id.required' => '配送先を選択してください',
-        ];
+        $validator->after(function ($validator) {
+            $user = auth()->user();
+
+            $product = $this->route('product');
+            $productId = $product->id;
+
+            if (!session()->has("payment_method_{$productId}")) {
+                $validator->errors()->add(
+                    'payment_method',
+                    '支払い方法を選択してください'
+                );
+            }
+
+            $hasSessionAddress =
+                session()->has("postal_code_{$product->id}") &&
+                session()->has("address_{$product->id}");
+
+            $hasUserAddress =
+            !empty($user->postal_code) &&
+            !empty($user->address);
+
+            if (
+                !($hasSessionAddress || $hasUserAddress)) {
+                    $validator->errors()->add(
+                        'address',
+                        '配送先を選択してください',
+                );
+            }
+        });
     }
 }

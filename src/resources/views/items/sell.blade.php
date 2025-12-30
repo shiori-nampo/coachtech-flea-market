@@ -68,7 +68,7 @@
         <label class="sell-field__label" for="price">販売価格</label>
         <div class="sell_price">
           <span class="sell-price__yen">¥</span>
-          <input class="sell-field__input" type="text" id="price" >
+          <input class="sell-field__input" type="text" id="price" name="price">
         </div>
       </section>
 

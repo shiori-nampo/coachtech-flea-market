@@ -31,6 +31,10 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/purchase/{product}', [PurchaseController::class,'show'])->name('purchase.show');
 
+    Route::get('/purchase/{product}/payment',[PurchaseController::class,'showPayment'])->name('purchase.payment');
+
+    Route::patch('/purchase/{product}/payment',[PurchaseController::class,'updatePayment'])->name('purchase.payment.update');
+
     Route::post('/purchase/{product}',[PurchaseController::class,'store'])->name('purchase.store');
 
     Route::get('/purchase/{product}/address',[PurchaseController::class,'showAddressForm'])

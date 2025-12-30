@@ -23,16 +23,13 @@
       <section class="purchase-section purchase-section--payment">
         <h2 class="purchase-title">支払い方法</h2>
       <div class="purchase-payment__select-wrapper">
-        <select class="purchase-payment__select" name="payment_method_id" id="payment-method-select">
-          <option disabled selected>選択してください</option>
-          @foreach($paymentMethods as $method)
-          <option value="{{ $method->id }}" {{ old('payment_method_id', $defaultPaymentMethod?->id) == $method->id ? 'selected' : '' }}>{{ $method->name }}</option>
-          @endforeach
-        </select>
-        @error('payment_method_id')
-        {{ $message }}
+        <a href="{{ route('purchase.payment',$product) }}" class="fake-select">
+          {{ $paymentMethod?->name ?? '選択してください' }}
+          <span class="fake-select__arrow">▼</span>
+        </a>
+        @error('payment_method')
+        <p class="error">{{ $message }}</p>
         @enderror
-      </div>
       </section>
       <section class="purchase-section  purchase-section--address">
         <div class="purchase-address__header">
@@ -44,20 +41,12 @@
           <p class="purchase-address__postal-code">{{ preg_replace('/(\d{3})(\d{4})/','$1-$2', $user->postal_code) }}</p>
         </div>
         <p class="purchase-address__address">{{ $user->address }} {{ $user->building ?? '' }}</p>
-
-        @error('address_id')
-        {{ $message }}
+        @error('address')
+        <p class="error">{{ $message }}</p>
         @enderror
       </section>
     </div>
     <div class="purchase-right">
-
-    @php
-      $selectedMethodId = old('payment_method_id', $defaultPaymentMethod?->id);
-      $selectedMethod = $paymentMethods->firstWhere('id',$selectedMethodId);
-    @endphp
-
-
       <div class="purchase-payment__info">
         <table class="payment-info__inner">
           <tr class="payment-info__row">
@@ -69,7 +58,9 @@
           </tr>
           <tr class="payment-info__row">
             <th class="payment-info__header">支払い方法</th>
-            <td class="payment-info__text" id="payment-method-display">{{ $selectedMethod?->name ?? 'コンビニ払い' }}</td>
+            <td class="payment-info__text" id="payment-method-display">
+              {{ $paymentMethod?->name ?? 'コンビニ払い' }}
+            </td>
           </tr>
         </table>
         <button class="purchase-btn" type="submit">購入する</button>
@@ -79,18 +70,3 @@
 </form>
 @endsection
 
-@section('js')
-<script>
-  document.addEventListener('DOMContentLoaded',function() {
-    const select = document.getElementById('payment-method-select');
-    const display = document.getElementById('payment-method-display');
-
-    if (!select || !display) return;
-
-    select.addEventListener('change', function() {
-      const selectedText = select.options[select.selectedIndex].text;
-      display.textContent = selectedText;
-    });
-  });
-  </script>
-  @endsection

@@ -18,67 +18,87 @@ use Illuminate\Support\Facades\Auth;
     {
         $user = Auth::user();
 
-        $paymentMethods = PaymentMethod::all();
+        $paymentMethodId = session("payment_method_{$product->id}");
+        $paymentMethod = $paymentMethodId
+        ? PaymentMethod::find($paymentMethodId)
+        : null;
 
-        $defaultPaymentMethod = $paymentMethods->firstWhere('code','convenience');
-
-        return view('purchase.purchase',compact('product','paymentMethods','defaultPaymentMethod','user'));
+        return view('purchase.purchase',compact('product','user','paymentMethod'));
     }
 
-    public function store(Request $request,Product $product)
+    public function showPayment(Product $product)
+    {
+        $user = Auth::user();
+        $paymentMethods = PaymentMethod::all();
+
+        return view('purchase.payment',compact('product','paymentMethods','user'
+        ));
+    }
+
+
+    public function updatePayment(Request $request, Product $product)
+    {
+
+        session([
+            "payment_method_{$product->id}" => $request->payment_method_id,
+        ]);
+
+        return redirect()->route('purchase.show',$product->id);
+    }
+
+
+
+    public function store(PurchaseRequest $request,Product $product)
     {
         $user = Auth::user();
 
         if ($product->status === 'sold') {
-            return redirect()->back()->with('error','この商品はすでに購入されています');
+            return redirect()->back();
         }
 
+        $paymentMethodId = session("payment_method_{$product->id}");
+        $paymentMethod = PaymentMethod::findOrFail($paymentMethodId);
 
-        if ($request->payment_method_id == 2) {
+        $orderData = [
+            'user_id'=> $user->id,
+            'product_id' => $product->id,
+            'payment_method_id' => $paymentMethod->id,
+            'price' => $product->price,
+            'postal_code' => session("postal_code_{$product->id}") ?? $user->postal_code,
+            'address' => session("address_{$product->id}") ?? $user->address,
+            'building' => session("building_{$product->id}") ?? $user->building,
+        ];
+
+        if ($paymentMethod->code === 'card') {
+
             Stripe::setApiKey(config('services.stripe.secret'));
 
-        $session = Session::create([
-            'payment_method_types' => ['card'],
-            'line_items' => [[
-                'price_data' => [
-                    'currency' => 'jpy',
-                    'product_data' => [
-                        'name' => $product->name,
-                    ],
-                    'unit_amount' => $product->price,
+            $session = Session::create([
+                'payment_method_types' => ['card'],
+                'line_items' => [[
+                    'price_data' => [
+                        'currency' => 'jpy',
+                        'product_data' => [
+                            'name' => $product->name,
                 ],
-                'quantity' => 1,
-            ]],
-            'mode' => 'payment',
-            'success_url' => route('items.index'),
-            'cancel_url' => route('purchase.show',$product),
+                'unit_amount' => $product->price,
+                ],
+            'quantity' => 1,
+        ]],
+        'mode' => 'payment',
+        'success_url' => route('items.index'),
+        'cancel_url' => route('purchase.show',$product),
             ]);
-
-            $product->update([
-            'status' => 'sold',
-        ]);
 
             return redirect($session->url);
         }
 
-        Order::create([
-            'user_id' => $user->id,
-            'product_id' => $product->id,
-            'payment_method_id' => $request->payment_method_id,
-            'price' => $product->price,
-            'postal_code' => $user->postal_code,
-            'address' => $user->address,
-            'building' => $user->building,
-        ]);
-        
-        $product->update([
-            'status' => 'sold',
-        ]);
+        Order::create($orderData);
+        $product->update(['status' => 'sold']);
 
-        \Log::info('Product updated',['id' => $product->id, 'status' => $product->status]);
-
-            return redirect()->route('items.index');
+        return redirect()->route('items.index');
     }
+
 
     public function showAddressForm(Product $product)
     {
@@ -88,15 +108,13 @@ use Illuminate\Support\Facades\Auth;
 
     public function updateAddress(Request $request, Product $product)
     {
-        $user = Auth::user();
-        $user->update([
-            'postal_code' => $request->postal_code,
-            'address' => $request->address,
-            'building' => $request->building,
+        session([
+            "postal_code_{$product->id}" => $request->postal_code,
+            "address_{$product->id}" => $request->address,
+            "building_{$product->id}" => $request->building,
         ]);
 
-        return redirect()->route('purchase.show',$product->id)
-                        ->with('success','住所を更新しました');
+        return redirect()->route('purchase.show',$product->id);
     }
 
 }

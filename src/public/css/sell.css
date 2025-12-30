@@ -29,7 +29,7 @@
 .sell-section__title {
   text-align: left;
   font-size: 18px;
-  margin-bottom: 3px;
+  margin-bottom: 2px;
 }
 
 .sell-section__header {
@@ -38,6 +38,7 @@
   font-size: 22px;
   color: #666771;
   text-align: left;
+  margin-bottom: 0;
 }
 
 .sell-image__box {
@@ -70,6 +71,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
+  margin-bottom: 40px;
 }
 
 .sell-category__item {
@@ -92,8 +94,34 @@
   align-items: center;
   border: 1px solid #000;
   padding: 8px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .sell-price__yen {
   margin-right: 8px;
+  font-weight: bold;
 }
+
+.sell-field {
+  display: flex;
+  flex-direction: column;
+}
+
+.sell-field__label {
+  margin-bottom: 5px;
+}
+
+.sell-field__select {
+  border: 1px solid #000;
+  font-size: 12px;
+  padding: 5px 10px;
+  border-radius: 3px;
+}
+
+.sell-field__input {
+  border: 1px solid #000;
+  border-radius: 3px;
+  margin-bottom: 20px;
+}
+
