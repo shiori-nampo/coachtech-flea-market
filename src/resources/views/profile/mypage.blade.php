@@ -10,7 +10,7 @@
 <div class="mypage-content">
   <div class="mypage-content__header">
     <div class="mypage-content__user">
-      <img class="mypage-content__image" src="{{ $user->image ? asset('storage/'.$user->image) : asset('images/no-image.png') }}" alt="">
+      <img class="mypage-content__image" src="{{ $user->profile_image ? asset('storage/'.$user->profile_image) : asset('images/no-image.png') }}" alt="">
       <h1 class="mypage-content__name">{{ $user->name }}</h1>
     </div>
     <a class="mypage-content__link" href="{{ route('profile.edit') }}">プロフィールを編集</a>

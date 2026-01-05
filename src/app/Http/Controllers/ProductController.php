@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Favorite;
+use App\Models\Condition;
+use App\Models\Category;
+use App\Http\Requests\ExhibitionRequest;
+use ILLuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
@@ -61,6 +65,38 @@ class ProductController extends Controller
             ]);
         }
         return back();
+    }
+
+
+    public function create()
+    {
+        $conditions = Condition::all();
+        $categories = Category::all();
+
+        return view('items.sell', compact('conditions','categories'));
+    }
+
+    public function store(ExhibitionRequest $request)
+    {
+        $user = Auth::user();
+
+        $path = null;
+        if ($request->hasFile('image')) {
+            $path = $request->file('image')->store('products','public');
+        }
+
+        Product::create([
+            'user_id' => $user->id,
+            'image' => $path ?? null,
+            'name' => $request->name,
+            'description' => $request->description,
+            'price' => $request->price,
+            'condition_id' => $request->condition_id,
+        ]);
+
+        $product->categories()->sync($request->category_ids);
+
+        return redirect()->route('items.index');
     }
 
 }

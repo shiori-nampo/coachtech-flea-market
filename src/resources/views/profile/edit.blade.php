@@ -13,7 +13,7 @@
     <form class="profile-form__form" action="{{ route('profile.update') }}" method="post" enctype="multipart/form-data">
       @csrf
       <div class="profile-form__images">
-        <img class="profile-form__image" src="{{ $user->image ? asset('storage/'.$user->image) : asset('images/no-image.png') }}" alt="">
+        <img class="profile-form__image" src="{{ $user->profile_image ? asset('storage/'.$user->profile_image) : asset('images/no-image.png') }}" alt="">
         <label class="profile-form__image-btn" type="submit">画像を選択する
         <input type="file" name="image" hidden>
         </label>

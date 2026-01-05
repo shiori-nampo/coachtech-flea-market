@@ -51,7 +51,7 @@
 }
 
 .sell-image__btn {
-  color: #F65861;;
+  color: #F65861;
   border: 1.5px solid #F65861;
   border-radius: 4px;
   padding: 5px 15px;
@@ -63,7 +63,7 @@
   font-weight: bold;
   text-align: left;
   margin-top: 20px;
-  margin-bottom: 30px;
+  margin-bottom: 5px;
   font-size: 18px;
 }
 
@@ -75,13 +75,30 @@
 }
 
 .sell-category__item {
-  padding: 4px 14px;
-  border: 1.5px solid #F65861;
-  border-radius: 999px;
-  background: #fff;
-  color: #F65861;
   cursor: pointer;
   font-size: 10px;
+  display: inline-block;
+  margin: 4px;
+}
+
+.sell-category__item input {
+  display: none;
+}
+
+.sell-category__item span {
+  display: inline-block;
+  padding: 6px 12px;
+  border: 1px solid #F65861;
+  color: #F65861;
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.sell-category__item input:checked + span {
+  background: #F65861;
+  color: #fff;
+  border-radius: 999px;
+  padding: 6px 14px;
 }
 
 .sell-category__item.is-active {
@@ -96,32 +113,77 @@
   padding: 8px;
   width: 100%;
   box-sizing: border-box;
+  position: relative;
 }
 
 .sell-price__yen {
-  margin-right: 8px;
+  position: absolute;
+  transform: translateY(-50%);
+  margin-left: 8px;
+  margin-top: 13px;
   font-weight: bold;
+  font-size: 14px;
 }
 
 .sell-field {
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 
-.sell-field__label {
-  margin-bottom: 5px;
+
+.sell-field__wrapper {
+  position: relative;
+  width: 100%;
 }
+
 
 .sell-field__select {
+  width: 100%;
   border: 1px solid #000;
   font-size: 12px;
   padding: 5px 10px;
   border-radius: 3px;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
 }
+
+.select-arrow {
+  position: absolute;
+  right: 7px;
+  top: 85%;
+  transform: translateY(-50%);
+  font-size: 10px;
+  color: #83868C;
+  pointer-events: none;
+}
+
 
 .sell-field__input {
   border: 1px solid #000;
   border-radius: 3px;
   margin-bottom: 20px;
+  width: 100%;
+  padding-left: 25px;
 }
 
+.sell-field__input--price {
+  border: none;
+  outline: none;
+  width: 100%;
+  font-size: 14px;
+  padding-left: 36px;
+}
+
+.sell-form__submit {
+  background: #F65861;
+  color: #fff;
+  width: 100%;
+  margin-top: 70px;
+  margin-bottom: 80px;
+  font-weight: bold;
+  height: 40px;
+  border-radius: 3px;
+  cursor: pointer;
+}

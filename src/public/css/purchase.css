@@ -75,7 +75,7 @@
 
 .fake-select {
   display: block;
-  width: 60%;
+  width: 75%;
   margin-left: 25px;
   margin-bottom: 40px;
   border-radius: 3px;
@@ -88,13 +88,40 @@
 
 .fake-select__arrow {
   position: absolute;
-  left: 24%;
+  left: 40%;
   top: 18%;
   transform: translateY(-50%);
   font-size: 12px;
   color: #666;
   margin-left: 145px;
   pointer-events: none;
+}
+
+@media (max-width:850px) {
+
+  .fake-select {
+  display: block;
+  width: 100%;
+  margin-left: 25px;
+  margin-bottom: 40px;
+  border-radius: 3px;
+  text-decoration:none;
+  font-size: 12px;
+  border: 1px solid #83868C;
+  padding: 2px 20px 2px 3px;
+  color: #666771;
+}
+
+.fake-select__arrow {
+  position: absolute;
+  left: 20%;
+  top: 18%;
+  transform: translateY(-50%);
+  font-size: 12px;
+  color: #666;
+  margin-left: 145px;
+  pointer-events: none;
+}
 }
 
 .purchase-address__header {

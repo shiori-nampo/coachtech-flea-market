@@ -51,12 +51,17 @@ Route::middleware('auth')->group(function () {
 
     Route::post('/mypage/profile',[ProfileController::class,'update'])
     ->name('profile.update');
+
+    Route::get('/sell',[ProductController::class,'create'])
+    ->name('items.sell');
+
+    Route::post('/sell',[ProductController::class,'store'])
+    ->name('items.store');
+
 });
 
 
-Route::get('/sell',function() {
-    return view('items.sell');
-})->name('items.sell');
+
 
 
 

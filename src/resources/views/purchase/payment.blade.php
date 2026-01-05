@@ -25,15 +25,25 @@
       <section class="payment-section payment-section--payment">
         <h2 class="payment-title">支払い方法</h2>
       <div class="payment-select__wrapper">
-        <select class="payment-payment__select" name="payment_method_id" id="payment-method-select">
-          <option value="" disabled {{ old('payment_method_id') === null ? 'selected' : '' }}>選択してください</option>
-          @foreach($paymentMethods as $method)
-          <option value="{{ $method->id }}" {{ old('payment_method_id') == $method->id ? 'selected' : '' }}>
-          {{ $method->name }}
-          </option>
-          @endforeach
-        </select>
-        <span class="select-arrow">▼</span>
+        <select
+        class="payment-payment__select"
+        name="payment_method_id"
+        id="payment-method-select"
+    >
+        <option value="" disabled {{ old('payment_method_id') === null ? 'selected' : '' }}>
+            選択してください
+        </option>
+
+        @foreach($paymentMethods as $method)
+            <option
+                value="{{ $method->id }}"
+                {{ old('payment_method_id') == $method->id ? 'selected' : '' }}
+            >
+                {{ $method->name }}
+            </option>
+        @endforeach
+    </select>
+
         @error('payment_method_id')
         <p class="error">{{ $message }}</p>
         @enderror

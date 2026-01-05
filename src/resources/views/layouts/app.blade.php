@@ -29,7 +29,7 @@
       </form>
       <a class="mypage__link header__nav" href="{{ route('mypage') }}">マイページ</a>
       <div class="header-sell">
-        <a class="sell__link header__nav" href="">出品</a>
+        <a class="sell__link header__nav" href="{{ route('items.sell') }}">出品</a>
       </div>
       @endauth
 

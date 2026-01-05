@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Product;
 use App\Models\Order;
+use App\Http\Requests\ProfileRequest;
 
 class ProfileController extends Controller
 {
@@ -36,7 +37,7 @@ class ProfileController extends Controller
         return view('profile.edit',compact('user'));
     }
 
-    public function update(Request $request)
+    public function update(ProfileRequest $request)
     {
         $user = Auth::user();
 
@@ -51,6 +52,6 @@ class ProfileController extends Controller
             'address' => $request->address,
             'building' => $request->building,
         ]);
-        return redirect()->route('profile.edit');//->with('success','プロフィールを更新しました');
+        return redirect()->route('profile.edit');
     }
 }
