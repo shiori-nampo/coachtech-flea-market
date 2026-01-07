@@ -142,7 +142,7 @@
   width: 100%;
   border: 1px solid #000;
   font-size: 12px;
-  padding: 5px 10px;
+  padding: 10px 10px;
   border-radius: 3px;
   appearance: none;
   -webkit-appearance: none;
@@ -165,15 +165,15 @@
   border-radius: 3px;
   margin-bottom: 20px;
   width: 100%;
-  padding-left: 25px;
+  padding: 2px 3px;
 }
 
 .sell-field__input--price {
-  border: none;
-  outline: none;
+  border: 1px solid #000;
+  border-radius: 3px;
+  margin-bottom: 20px;
   width: 100%;
-  font-size: 14px;
-  padding-left: 36px;
+  padding-left: 25px;
 }
 
 .sell-form__submit {

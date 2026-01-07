@@ -41,17 +41,21 @@ class ProfileController extends Controller
     {
         $user = Auth::user();
 
-        if ($request->hasFile('image')) {
-            $path = $request->file('image')->store('profiles','public');
-            $user->image = $path;
-        }
-
-        $user->update([
+        $data = [
             'name' => $request->name,
             'postal_code' => $request->postal_code,
             'address' => $request->address,
             'building' => $request->building,
-        ]);
+        ];
+
+        if ($request->hasFile('image')) {
+            $filename = 'user_' . $user->id . '_profile.' . $request->file('image')->getClientOriginalExtension();
+            $path = $request->file('image')->storeAs('profiles',$filename,'public');
+            $data['profile_image'] = $path;
+        }
+
+        $user->update($data);
+
         return redirect()->route('profile.edit');
     }
 }

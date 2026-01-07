@@ -10,7 +10,8 @@
 <div class="sell-form">
   <h1 class="sell-form__title">商品の出品</h1>
   <div class="sell-form__inner">
-    <form class="sell-form__form">
+    <form class="sell-form__form" action="{{ route('items.store') }}" method="post" enctype="multipart/form-data">
+      @csrf
 
       <section class="sell-section">
         <h2 class="sell-section__title">商品画像</h2>
@@ -67,14 +68,14 @@
         <h2 class="sell-section__header">商品名と説明</h2>
         <div class="sell-field">
           <label class="sell-field__label" for="name">商品名</label>
-          <input class="sell-field__input" type="text" id="name" value="{{ old('name') }}">
+          <input class="sell-field__input" type="text" id="name" name="name" value="{{ old('name') }}">
           @error('name')
         <p class="error">{{ $message }}</p>
         @enderror
         </div>
         <div class="sell-field">
           <label class="sell-field__label" for="brand_name">ブランド名</label>
-          <input class="sell-field__input" type="text" id="brand_name">
+          <input class="sell-field__input" type="text" id="brand_name" name="brand_name" value="{{ old('brand_name') }}">
         </div>
         <div class="sell-field">
           <label class="sell-field__label">商品の説明</label>
@@ -88,7 +89,7 @@
         <label class="sell-field__label" for="price">販売価格</label>
         <div class="sell_price">
           <span class="sell-price__yen">¥</span>
-          <input class="sell-field__input" type="number" id="price" name="price" value="{{ old('price') }}">
+          <input class="sell-field__input--price" type="number" id="price" name="price" value="{{ old('price') }}">
           @error('price')
         <p class="error">{{ $message }}</p>
         @enderror

@@ -8,7 +8,7 @@
 @section('content')
 <div class="detail-content">
   <div class="detail-content__inner">
-    <img class="detail-image" src="{{ $product->image }}" alt="{{ $product->name }}">
+    <img class="detail-image" src="{{ $product->image_url }}" alt="{{ $product->name }}">
     <div class="detail-items">
       <h1 class="detail-items__name">{{ $product->name }}</h1>
       <p class="detail-items__brand">{{ $product->brand }}</p>
@@ -26,7 +26,11 @@
           <span>{{ $product->comments->count() }}</span>
       </div>
     </div>
-    <a class="purchase__link" href="{{ route('purchase.show',$product ) }}">購入手続きへ</a>
+    @if($product->order)
+        <p class="sold-out">SOLD OUT</p>
+    @else
+        <a class="purchase__link" href="{{ route('purchase.show',$product ) }}">購入手続きへ</a>
+    @endif
     <h2 class="section-title">商品説明</h2>
     <p class="description-text">{{ $product->description }}</p>
     <h3 class="section-title">商品の情報</h3>

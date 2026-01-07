@@ -56,6 +56,10 @@ use Illuminate\Support\Facades\Auth;
             return redirect()->back();
         }
 
+        if ($product->order) {
+            abort(403,'この商品はすでに購入されています');
+        }
+
         $paymentMethodId = session("payment_method_{$product->id}");
         $paymentMethod = PaymentMethod::findOrFail($paymentMethodId);
 

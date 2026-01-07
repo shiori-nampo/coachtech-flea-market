@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class Product extends Model
 {
@@ -40,12 +41,28 @@ class Product extends Model
         return $this->hasOne(Order::class);
     }
 
+
     protected $fillable = [
+        'user_id',
+        'image',
         'name',
         'brand_name',
         'description',
         'price',
-        'condition',
+        'condition_id',
         'status',
     ];
+
+    public function getImageUrlAttribute()
+    {
+        if (!$this->image) {
+            return asset('images/no-image.png');
+        }
+
+        if (str_starts_with($this->image, 'http') || str_starts_with($this->image, 'images/')) {
+            return asset($this->image);
+        }
+
+        return asset('storage/'. $this->image);
+    }
 }

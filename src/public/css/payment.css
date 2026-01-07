@@ -46,7 +46,7 @@
 }
 
 .payment-product__price {
-  font-size: 20px;
+  font-size: 22px;
   margin-left: 3px;
 }
 
@@ -55,7 +55,7 @@
 }
 
 .payment-product__yen, .payment-info__yen {
-  font-size: 16px;
+  font-size: 18px;
 }
 
 .payment-title {
@@ -63,7 +63,7 @@
   margin: 20px 0 30px 20px;
 }
 
-.payment-payment__select-wrapper {
+.payment-select__wrapper {
   position: relative;
   width: 40%;
   margin-left: 70px;
@@ -71,31 +71,32 @@
 }
 
 .payment-payment__select {
-  width: 30%;
-  margin-left: 70px;
+  width: 60%;
   margin-bottom: 40px;
   border-radius: 3px;
   font-size: 12px;
   border: 1px solid #83868C;
-  padding: 4px 5px;
+  padding: 7px 5px;
   appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
+  font-weight: bold;
+  color: #666771;
 }
 
 .select-arrow {
-  font-size: 10px;
-  color: #83868C;
+  font-size: 12px;
+  color: #666;
   position: absolute;
-  left: 25%;
-  top: 55.5%;
+  right: 42%;
+  top: 20%;
   transform: translateY(-50%);
   pointer-events: none;
 }
 
 @media (max-width:850px) {
 
-  .payment-payment__select-wrapper {
+  .payment-select__wrapper {
   position: relative;
   width: 40%;
   margin-left: 70px;
@@ -104,8 +105,7 @@
 
 
   .payment-payment__select {
-  width: 45%;
-  margin-left: 70px;
+  width: 110%;
   margin-bottom: 40px;
   border-radius: 3px;
   font-size: 12px;
@@ -117,10 +117,10 @@
 }
   .select-arrow {
     font-size: 10px;
-    color: #83868C;
+    color: #666;
     position: absolute;
-    right: 10%;
-    top:80%;
+    left: 100%;
+    top: 22%;
     transform: translateY(-50%);
     pointer-events: none;
   }
@@ -138,7 +138,7 @@
   margin-top: 20px;
 }
 
-.payment-payment__info {
+.payment-info {
   padding: 0 24px;
   background:#fff;
 }
@@ -153,11 +153,29 @@
 .payment-info__row th,
 .payment-info__row td {
   padding: 40px 40px;
-  font-size: 18px;
+  font-size: 20px;
   font-weight: lighter;
   text-align: center;
   border-bottom: 1px solid #000;
 }
+
+@media (max-width:850px) {
+  .payment-info__row th,
+.payment-info__row td {
+  font-size: 14px;
+  font-weight: lighter;
+  text-align: center;
+  border-bottom: 1px solid #000;
+  height: 100px;
+  padding: 1px;
+}
+
+.payment-info__yen,
+.payment-info__amount {
+  font-size: 16px;
+}
+}
+
 
 .payment-info__header {
   color: #555;
@@ -165,7 +183,7 @@
 
 .payment-btn {
   width: 100%;
-  padding: 7px 0px;
+  padding: 10px 0px;
   background: #F65861;
   border-radius: 4px;
   color: #fff;

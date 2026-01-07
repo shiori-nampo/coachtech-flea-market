@@ -1,0 +1,33 @@
+.email-content {
+  text-align: center;
+}
+
+.email-title {
+  font-weight: bold;
+  margin-top: 200px;
+  margin-bottom: 70px;
+  font-size: 25px;
+}
+
+.email-content__link {
+  font-weight: bold;
+  background: #C5C5C7;
+  border: 1px solid #000;
+  color: #000;
+  border-radius: 8px;
+  cursor: pointer;
+  text-decoration: none;
+  padding: 20px 25px;
+  font-size: 25px;
+}
+
+.email-content__resend {
+  margin-top: 70px;
+  color: 	#1E90FF;
+  cursor: pointer;
+  font-size: 14px;
+  font-size: 20px;
+}
+
+
+

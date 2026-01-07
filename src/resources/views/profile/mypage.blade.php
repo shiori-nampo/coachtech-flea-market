@@ -24,9 +24,9 @@
   <div class="mypage-content__tab-inner">
     @forelse ($products as $product)
     <div class="mypage-content__group">
-      <a href="{{route('items.detail', $product->id) }}">
+      <a href="{{ route('items.detail', $product->id) }}">
         <img class="mypage-content__group-image"
-          src="{{ $product->image }}" alt="{{ $product->name }}">
+          src="{{ $product->image_url }}" alt="{{ $product->name }}">
         <p class="mypage-content__group-name">{{ $product->name }}</p>
       </a>
     </div>

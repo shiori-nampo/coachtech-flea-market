@@ -22,8 +22,13 @@ Route::get('/',[ProductController::class,'index'])->name('items.index');
 Route::get('/products/{product}',[ProductController::class,'show'])->name('items.detail');
 
 
+Route::middleware('auth')->get('/verify', function () {
+    return view('auth.verify');
+})->name('verify');
 
-Route::middleware('auth')->group(function () {
+
+
+Route::middleware('auth','verified')->group(function () {
 
     Route::post('/products/{product}/favorite',[ProductController::class,'toggleFavorite'])->name('products.toggleFavorite');
 

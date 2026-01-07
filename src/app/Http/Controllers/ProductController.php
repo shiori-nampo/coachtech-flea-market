@@ -82,21 +82,25 @@ class ProductController extends Controller
 
         $path = null;
         if ($request->hasFile('image')) {
-            $path = $request->file('image')->store('products','public');
+            $filename = time() . '_' .$request->file('image')->getClientOriginalName();
+            $path = $request->file('image')->storeAs('products',$filename,'public');
         }
 
-        Product::create([
+
+        $product = Product::create([
             'user_id' => $user->id,
-            'image' => $path ?? null,
+            'image' => $path,
             'name' => $request->name,
             'description' => $request->description,
             'price' => $request->price,
             'condition_id' => $request->condition_id,
+            'status' => 'selling',
         ]);
 
         $product->categories()->sync($request->category_ids);
 
         return redirect()->route('items.index');
     }
+
 
 }

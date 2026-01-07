@@ -30,7 +30,7 @@
         name="payment_method_id"
         id="payment-method-select"
     >
-        <option value="" disabled {{ old('payment_method_id') === null ? 'selected' : '' }}>
+        <option value="" disabled {{ old('payment_method_id') === null ? 'selected' : '' }} hidden>
             選択してください
         </option>
 
@@ -44,11 +44,14 @@
         @endforeach
     </select>
 
+    <span class="select-arrow">▼</span>
+    </div>
+
         @error('payment_method_id')
         <p class="error">{{ $message }}</p>
         @enderror
-      </div>
       </section>
+
       <section class="payment-section  payment-section--address">
         <div class="payment-address__header">
           <h2 class="payment-title">配送先</h2>
