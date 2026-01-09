@@ -52,26 +52,12 @@ use Illuminate\Support\Facades\Auth;
     {
         $user = Auth::user();
 
-        if ($product->status === 'sold') {
-            return redirect()->back();
-        }
-
         if ($product->order) {
             abort(403,'この商品はすでに購入されています');
         }
 
         $paymentMethodId = session("payment_method_{$product->id}");
         $paymentMethod = PaymentMethod::findOrFail($paymentMethodId);
-
-        $orderData = [
-            'user_id'=> $user->id,
-            'product_id' => $product->id,
-            'payment_method_id' => $paymentMethod->id,
-            'price' => $product->price,
-            'postal_code' => session("postal_code_{$product->id}") ?? $user->postal_code,
-            'address' => session("address_{$product->id}") ?? $user->address,
-            'building' => session("building_{$product->id}") ?? $user->building,
-        ];
 
         if ($paymentMethod->code === 'card') {
 
@@ -90,15 +76,52 @@ use Illuminate\Support\Facades\Auth;
             'quantity' => 1,
         ]],
         'mode' => 'payment',
-        'success_url' => route('items.index'),
+        'success_url' => route('purchase.success',$product),
         'cancel_url' => route('purchase.show',$product),
             ]);
 
             return redirect($session->url);
         }
 
-        Order::create($orderData);
+        Order::create([
+            'user_id'=> $user->id,
+            'product_id' => $product->id,
+            'payment_method_id' => $paymentMethod->id,
+            'price' => $product->price,
+            'postal_code' => session("postal_code_{$product->id}") ?? $user->postal_code,
+            'address' => session("address_{$product->id}") ?? $user->address,
+            'building' => session("building_{$product->id}") ?? $user->building,
+        ]);
+
         $product->update(['status' => 'sold']);
+
+        return redirect()->route('items.index');
+    }
+
+    public function success(Product $product)
+    {
+        $user = Auth::user();
+
+        if ($product->order) {
+            return redirect()->route('items.index');
+        }
+
+        $paymentMethodId = session("payment_method_{$product->id}");
+        $paymentMethod = PaymentMethod::findOrFail($paymentMethodId);
+
+        Order::create([
+            'user_id' => $user->id,
+            'product_id' => $product->id,
+            'payment_method_id' => $paymentMethod->id,
+            'price' => $product->price,
+            'postal_code' => session("postal_code_{$product->id}") ?? $user->postal_code,
+            'address' => session("address_{$product->id}") ?? $user->address,
+            'building' => session("building_{$product->id}") ?? $user->building,
+        ]);
+
+        $product->update([
+            'status' => 'sold',
+        ]);
 
         return redirect()->route('items.index');
     }

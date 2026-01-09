@@ -152,9 +152,9 @@
 .select-arrow {
   position: absolute;
   right: 7px;
-  top: 85%;
+  top: 80%;
   transform: translateY(-50%);
-  font-size: 10px;
+  font-size: 13px;
   color: #83868C;
   pointer-events: none;
 }

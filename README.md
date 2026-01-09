@@ -42,10 +42,12 @@ php artisan migrate
 - PHP8.1.33
 - Laravel8.83.29
 - MySQL8.0.44
+- MailHog(メール認証用)
 
 ## ER図
 ![doc](er_diagram.png)
 
 ## URL
 - 開発環境：http://localhost:8000/
-- phpMyAdmin:：http://localhost:8080
+- phpMyAdmin：http://localhost:8080
+- MailHog:http://localhost:8025

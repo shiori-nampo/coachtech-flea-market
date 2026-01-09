@@ -36,11 +36,18 @@
           <h2 class="purchase-title">配送先</h2>
           <a class="purchase-address__link" href="{{ route('purchase.address',$product->id) }}">変更する</a>
         </div>
+
+        @php
+        $postalCode = session("postal_code_($product->id)", $user->postal_code);
+        $address = session("address_{$product->id}", $user->address);
+        $building = session("building_{$product->id}", $user->building);
+        @endphp
+
         <div class="purchase-addresses">
           <span class="purchase-address__post">〒</span>
-          <p class="purchase-address__postal-code">{{ preg_replace('/(\d{3})(\d{4})/','$1-$2', $user->postal_code) }}</p>
+          <p class="purchase-address__postal-code">{{ preg_replace('/(\d{3})(\d{4})/','$1-$2', $postalCode) }}</p>
         </div>
-        <p class="purchase-address__address">{{ $user->address }} {{ $user->building ?? '' }}</p>
+        <p class="purchase-address__address">{{ $address }} {{ $building ?? '' }}</p>
         @error('address')
         <p class="error">{{ $message }}</p>
         @enderror

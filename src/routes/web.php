@@ -42,6 +42,9 @@ Route::middleware('auth','verified')->group(function () {
 
     Route::post('/purchase/{product}',[PurchaseController::class,'store'])->name('purchase.store');
 
+    Route::get('/purchase/{product}/success',
+    [PurchaseController::class,'success'])->name('purchase.success');
+
     Route::get('/purchase/{product}/address',[PurchaseController::class,'showAddressForm'])
     ->name('purchase.address');
 
