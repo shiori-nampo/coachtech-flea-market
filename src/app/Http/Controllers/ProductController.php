@@ -17,26 +17,31 @@ class ProductController extends Controller
         $tab = $request->tab ?? 'all';
         $keyword = $request->keyword;
 
-        if($tab === 'mylist' && !auth()->check()) {
-            return redirect()->route('login');
-        }
-
         $query = Product::query();
 
+        if (Auth::check()) {
+            $query->where('user_id', '!=', Auth::id());
+        }
+
         if ($tab === 'mylist') {
-            $query->whereHas('favorites', function($q) {
-                $q->where('user_id',auth()->id());
+
+            if (Auth::check()) {
+
+                $query->whereHas('favorites', function($q) {
+                    $q->where('user_id',auth()->id());
             });
 
         } else {
-            $query->where('user_id', '!=', auth()->id() ?? 0);
-                //->where('status','!=','sold');
+            $query->whereRaw('0 = 1');
         }
+
+    }
             if ($keyword) {
                 $query->where('name','like',"%{$keyword}%");
             }
 
             $products = $query->get();
+
             return view('items.index',compact('products','tab','keyword'));
         }
 
@@ -45,7 +50,16 @@ class ProductController extends Controller
     public function show($id)
     {
         $product = Product::with('categories','comments.user','user')->findOrFail($id);
-        return view('items.detail',compact('product'));
+
+        $isFavorited = false;
+
+        if (auth()->check()) {
+        $isFavorited = $product->favorites()
+        ->where('user_id', auth()->id())
+        ->exists();
+        }
+
+        return view('items.detail',compact('product','isFavorited'));
     }
 
     public function toggleFavorite(Product $product)

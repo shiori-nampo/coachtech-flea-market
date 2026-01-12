@@ -21,7 +21,7 @@
       <form class="search-form" action="{{ route('items.index') }}" method="get">
         @csrf
         <input class="search-form__input" type="text" name="keyword" placeholder="なにをお探しですか？" value="{{ request('keyword') }}">
-        <input type="hidden" name="tab" value="{{ request('tab') }}">
+        <input type="hidden" name="tab" value="{{ request('tab'. 'all') }}">
       </form>
       <form action="/logout" method="post">
         @csrf

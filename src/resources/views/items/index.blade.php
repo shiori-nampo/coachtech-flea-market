@@ -31,7 +31,7 @@
         <p class="product-group__name">{{ $product->name }}</p>
       </a>
       @if($product->status === 'sold')
-      <span class="sold-badge">sold</span>
+      <span class="sold-badge">Sold</span>
       @endif
     </div>
     @endforeach
