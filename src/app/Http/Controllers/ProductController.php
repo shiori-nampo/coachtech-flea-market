@@ -8,7 +8,7 @@ use App\Models\Favorite;
 use App\Models\Condition;
 use App\Models\Category;
 use App\Http\Requests\ExhibitionRequest;
-use ILLuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
@@ -24,51 +24,50 @@ class ProductController extends Controller
         }
 
         if ($tab === 'mylist') {
-
             if (Auth::check()) {
-
                 $query->whereHas('favorites', function($q) {
                     $q->where('user_id',auth()->id());
-            });
-
-        } else {
+                });
+            } else {
             $query->whereRaw('0 = 1');
-        }
 
-    }
-            if ($keyword) {
-                $query->where('name','like',"%{$keyword}%");
             }
-
-            $products = $query->get();
-
-            return view('items.index',compact('products','tab','keyword'));
         }
 
+        if ($keyword) {
+            $query->where('name','like',"%{$keyword}%");
+        }
+
+        $products = $query->get();
+
+        return view('items.index',compact('products','tab','keyword'));
+    }
 
 
-    public function show($id)
+
+    public function show($item_id)
     {
-        $product = Product::with('categories','comments.user','user')->findOrFail($id);
+        $product = Product::with('categories','comments.user','user')->findOrFail($item_id);
 
         $isFavorited = false;
 
         if (auth()->check()) {
-        $isFavorited = $product->favorites()
-        ->where('user_id', auth()->id())
-        ->exists();
+            $isFavorited = $product->favorites()
+                ->where('user_id', auth()->id())
+                ->exists();
         }
 
         return view('items.detail',compact('product','isFavorited'));
     }
 
-    public function toggleFavorite(Product $product)
+    public function toggleFavorite($item_id)
     {
         $user = auth()->user();
+        $product = Product::findOrFail($item_id);
 
         $favorite = Favorite::where('user_id',$user->id)
-                            ->where('product_id',$product->id)
-                            ->first();
+            ->where('product_id',$product->id)
+            ->first();
 
         if ($favorite) {
             $favorite->delete();
@@ -114,6 +113,19 @@ class ProductController extends Controller
         $product->categories()->sync($request->category_ids);
 
         return redirect()->route('items.index');
+    }
+
+    public function detail($item_id)
+    {
+        $product = Product::with(['favorites','comments','categories','condition'])->findOrFail($item_id);
+
+        $isFavorited = false;
+
+        if (auth()->check()) {
+            $isFavorited = $product->favorites->contains('user_id',auth()->id());
+        }
+
+        return view ('items.detail', compact('product','isFavorited'));
     }
 
 

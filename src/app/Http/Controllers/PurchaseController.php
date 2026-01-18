@@ -14,8 +14,9 @@ use Illuminate\Support\Facades\Auth;
 
     class PurchaseController extends Controller
     {
-    public function show(Product $product)
+    public function show($item_id)
     {
+        $product = Product::findOrFail($item_id);
         $user = Auth::user();
 
         $paymentMethodId = session("payment_method_{$product->id}");
@@ -23,21 +24,34 @@ use Illuminate\Support\Facades\Auth;
         ? PaymentMethod::find($paymentMethodId)
         : null;
 
-        return view('purchase.purchase',compact('product','user','paymentMethod'));
+        $postalCode = session("postal_code_{$product->id}") ?? $user->postal_code;
+        $address = session("address_{$product->id}") ?? $user->address;
+        $building = session("building_{$product->id}") ?? $user->building;
+
+        return view('purchase.purchase',compact(
+            'product','user','paymentMethod',
+            'postalCode','address','building'
+    ));
     }
 
-    public function showPayment(Product $product)
+    public function showPayment($item_id)
     {
         $user = Auth::user();
+        $product = Product::findOrFail($item_id);
         $paymentMethods = PaymentMethod::all();
 
-        return view('purchase.payment',compact('product','paymentMethods','user'
+        return view('purchase.payment',compact(
+            'product',
+            'paymentMethods',
+            'user'
         ));
     }
 
 
-    public function updatePayment(Request $request, Product $product)
+    public function updatePayment(Request $request,$item_id)
     {
+        $product = Product::findOrFail($item_id);
+        $user = auth()->user();
 
         session([
             "payment_method_{$product->id}" => $request->payment_method_id,
@@ -48,9 +62,10 @@ use Illuminate\Support\Facades\Auth;
 
 
 
-    public function store(PurchaseRequest $request,Product $product)
+    public function store(PurchaseRequest $request,$item_id)
     {
         $user = Auth::user();
+        $product = Product::findOrFail($item_id);
 
         if ($product->order) {
             abort(403,'この商品はすでに購入されています');
@@ -76,8 +91,8 @@ use Illuminate\Support\Facades\Auth;
             'quantity' => 1,
         ]],
         'mode' => 'payment',
-        'success_url' => route('purchase.success',$product),
-        'cancel_url' => route('purchase.show',$product),
+        'success_url' => route('purchase.success',$product->id),
+        'cancel_url' => route('purchase.show',$product->id),
             ]);
 
             return redirect($session->url);
@@ -98,9 +113,11 @@ use Illuminate\Support\Facades\Auth;
         return redirect()->route('items.index');
     }
 
-    public function success(Product $product)
+    // すでに注文が作成されている場合は二重登録防止
+    public function success($item_id)
     {
         $user = Auth::user();
+        $product = Product::findOrFail($item_id);
 
         if ($product->order) {
             return redirect()->route('items.index');
@@ -127,14 +144,19 @@ use Illuminate\Support\Facades\Auth;
     }
 
 
-    public function showAddressForm(Product $product)
+    public function showAddressForm($item_id)
     {
         $user = Auth::user();
+        $product = Product::findOrFail($item_id);
+
         return view('purchase.address',compact('product','user'));
     }
 
-    public function updateAddress(Request $request, Product $product)
+    public function updateAddress(AddressRequest $request, $item_id)
     {
+        $product = Product::findOrFail($item_id);
+        $user = auth()->user();
+
         session([
             "postal_code_{$product->id}" => $request->postal_code,
             "address_{$product->id}" => $request->address,

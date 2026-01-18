@@ -7,21 +7,19 @@ use Tests\TestCase;
 use App\Models\Product;
 use App\Models\User;
 use App\Models\Favorite;
+use Database\Seeders\ConditionSeeder;
+
 
 
 class FavoriteTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_detail_page_can_be_displayed()
+    protected function setUp(): void
     {
-        $product = Product::factory()->create();
-
-        $response = $this->get(route('items.detail',['product' => $product->id]));
-
-        $response->assertStatus(200);
+        parent::setUp();
+        $this->seed(ConditionSeeder::class);
     }
-
 
     public function test_user__can_favorite_a_product()
     {
@@ -30,7 +28,7 @@ class FavoriteTest extends TestCase
 
         $this->actingAs($user);
 
-        $response = $this->post(route('products.toggleFavorite',['product' => $product->id,
+        $response = $this->post(route('items.toggleFavorite',['item_id' => $product->id,
         ]));
 
         $response->assertStatus(302);
@@ -49,6 +47,7 @@ class FavoriteTest extends TestCase
         $user = User::factory()->create();
         $product = Product::factory()->create();
 
+
         Favorite::create([
             'user_id' => $user->id,
             'product_id' => $product->id,
@@ -57,7 +56,7 @@ class FavoriteTest extends TestCase
         $this->actingAs($user);
 
         $response = $this->get(route('items.detail',[
-            'product' => $product->id,
+            'item_id' => $product->id,
         ]));
 
         $response->assertStatus(200);
@@ -77,8 +76,8 @@ class FavoriteTest extends TestCase
 
         $this->actingAs($user);
 
-        $this->post(route('products.toggleFavorite',[
-            'product' => $product->id,
+        $this->post(route('items.toggleFavorite',[
+            'item_id' => $product->id,
         ]));
 
         $this->assertDatabaseMissing('favorites',[

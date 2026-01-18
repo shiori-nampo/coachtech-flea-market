@@ -9,18 +9,18 @@ use App\Models\Condition;
 
 class ProductFactory extends Factory
 {
-    protected $models = Product::class;
+    protected $model = Product::class;
 
     public function definition()
     {
         return [
             'user_id' => User::factory(),
-            'condition_id' => Condition::factory(),
+            'condition_id' => Condition::inRandomOrder()->value('id'),
             'name' => $this->faker->word(),
             'brand_name' => null,
             'description' => $this->faker->sentence(),
             'price' => 1000,
-            'status' => 'sold',
+            'status' => 'selling',
             'image' => 'test.jpg',
         ];
     }

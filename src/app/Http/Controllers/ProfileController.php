@@ -15,16 +15,16 @@ class ProfileController extends Controller
     public function mypage(Request $request)
     {
         $user = Auth::user();
-        $tab = $request->query('tab','sell');
+        $page = $request->query('page','sell');
 
-        if ($tab === 'buy') {
+        if ($page === 'buy') {
             $products = Product::whereHas('order',function($q) use ($user) {
                 $q->where('user_id',$user->id);
             })->get();
         }else {
             $products = Product::where('user_id',$user->id)->get();
         }
-        return view('profile.mypage',compact('user','products','tab'));
+        return view('profile.mypage',compact('user','products','page'));
 
     }
 

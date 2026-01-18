@@ -59,7 +59,11 @@ class Product extends Model
             return asset('images/no-image.png');
         }
 
-        if (str_starts_with($this->image, 'http') || str_starts_with($this->image, 'images/')) {
+        if (str_starts_with($this->image, 'http')) {
+            return $this->image;
+        }
+
+        if (str_starts_with($this->image, 'images/')) {
             return asset($this->image);
         }
 

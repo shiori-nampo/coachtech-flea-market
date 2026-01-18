@@ -3,6 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Models\Product;
+
 
 class PurchaseRequest extends FormRequest
 {
@@ -30,11 +32,10 @@ class PurchaseRequest extends FormRequest
     {
         $validator->after(function ($validator) {
             $user = auth()->user();
+            $product = Product::find($this->route('item_id'));
 
-            $product = $this->route('product');
-            $productId = $product->id;
 
-            if (!session()->has("payment_method_{$productId}")) {
+            if (!session()->has("payment_method_{$product->id}")) {
                 $validator->errors()->add(
                     'payment_method',
                     '支払い方法を選択してください'
@@ -57,5 +58,10 @@ class PurchaseRequest extends FormRequest
                 );
             }
         });
+    }
+
+    protected function getRedirectUrl()
+    {
+        return route('purchase.show',$this->route('item_id'));
     }
 }

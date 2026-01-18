@@ -34,7 +34,7 @@ class RegisterTest extends TestCase
     public function test_email_is_required_on_register()
     {
         $response = $this->post('/register',[
-            'name' => 'テスト太郎',
+            'name' => 'テストユーザー',
             'email' => '',
             'password' => 'password123',
             'password_confirmation' => 'password123',
@@ -48,7 +48,7 @@ class RegisterTest extends TestCase
     public function test_password_is_required_on_register()
     {
         $response = $this->post('/register',[
-            'name' => 'テスト太郎',
+            'name' => 'テストユーザー',
             'email' => 'test@example.com',
             'password' => '',
             'password_confirmation' => 'password123',
@@ -62,7 +62,7 @@ class RegisterTest extends TestCase
     public function test_password_must_be_at_least_8_characters()
     {
         $response = $this->post('/register',[
-            'name' => 'テスト太郎',
+            'name' => 'テストユーザー',
             'email' => 'test@example.com',
             'password' => '1234567',
             'password_confirmation' => '1234567',
@@ -76,7 +76,7 @@ class RegisterTest extends TestCase
     public function test_password_confirmation_does_not_match()
     {
         $response = $this->post('/register',[
-            'name' => 'テスト太郎',
+            'name' => 'テストユーザー',
             'email' => 'test@example.com',
             'password' => 'password123',
             'password_confirmation' => 'password456',
@@ -90,7 +90,7 @@ class RegisterTest extends TestCase
     public function test_user_can_register_with_valid_data()
     {
         $response = $this->post('/register',[
-            'name' => 'テスト太郎',
+            'name' => 'テストユーザー',
             'email' => 'test@example.com',
             'password' => 'password123',
             'password_confirmation' => 'password123',

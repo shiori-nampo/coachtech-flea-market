@@ -8,16 +8,16 @@
 @section('content')
 <div class="detail-content">
   <div class="detail-content__inner">
-    <img class="detail-image" src="{{ $product->image_url }}" alt="{{ $product->name }}">
+    <img class="detail-image" src="{{ $product->image }}" alt="{{ $product->name }}">
     <div class="detail-items">
       <h1 class="detail-items__name">{{ $product->name }}</h1>
-      <p class="detail-items__brand">{{ $product->brand }}</p>
+      <p class="detail-items__brand">{{ $product->brand_name }}</p>
       <p class="detail-items__price">¥{{ number_format($product->price) }}</p>
     <div class="detail-icons">
-      <form action="{{ route('products.toggleFavorite',$product) }}" method="post">
+      <form action="{{ route('items.toggleFavorite',['item_id' => $product->id]) }}" method="post">
         @csrf
         <button class="icon-box heart" type="submit">
-          <img src="{{ $product->favorites->contains('user_id',auth()->id()) ? asset('images/heart_pink.png') : asset('images/heart_logo.png') }}" alt="いいね">
+          <img src="{{ $isFavorited ? asset('images/heart_pink.png') : asset('images/heart_logo.png') }}" alt="いいね">
             <span>{{ $product->favorites->count() }}</span>
         </button>
       </form>
@@ -27,9 +27,9 @@
       </div>
     </div>
     @if($product->order)
-        <p class="sold-out">SOLD OUT</p>
+        <p class="sold-out">sold</p>
     @else
-        <a class="purchase__link" href="{{ route('purchase.show',$product ) }}">購入手続きへ</a>
+        <a class="purchase__link" href="{{ route('purchase.show',$product->id ) }}">購入手続きへ</a>
     @endif
     <h2 class="section-title">商品説明</h2>
     <p class="description-text">{{ $product->description }}</p>
@@ -63,10 +63,15 @@
     @endforeach
     <div class="comments">
       <h3 class="comment-title">商品へのコメント</h3>
-      <form class="comment-form" action="{{ route('comments.store', $product) }}" method="post">
+      <form class="comment-form" action="{{ route('comments.store', ['item_id' => $product->id]) }}" method="post">
         @csrf
         <textarea class="comment-input" name="content">{{ old('content') }}</textarea>
           <button class="comment-submit" type="submit">コメントを送信する</button>
+          <p class="error">
+            @error('content')
+            {{ $message }}
+            @enderror
+          </p>
       </form>
     </div>
     </div>

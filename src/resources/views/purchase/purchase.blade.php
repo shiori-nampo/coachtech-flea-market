@@ -6,12 +6,12 @@
 
 
 @section('content')
-<form class="purchase-form" action="{{ route('purchase.store',$product) }}" method="post">
+<form class="purchase-form" action="{{ route('purchase.store', $product->id) }}" method="post">
   @csrf
   <div class="purchase-content">
     <div class="purchase-left">
       <section class="purchase-section purchase-section--product">
-        <img class="purchase-product__image" src="{{ $product->image_url }}" alt="{{ $product->name }}">
+        <img class="purchase-product__image" src="{{ $product->image }}" alt="{{ $product->name }}">
         <div class="purchase-product__info">
           <h1 class="purchase-product__name">{{ $product->name }}</h1>
           <div class="purchase-product__prices">
@@ -23,12 +23,12 @@
       <section class="purchase-section purchase-section--payment">
         <h2 class="purchase-title">支払い方法</h2>
       <div class="purchase-payment__select-wrapper">
-        <a href="{{ route('purchase.payment',$product) }}" class="fake-select">
+        <a href="{{ route('purchase.payment',$product->id) }}" class="fake-select">
           {{ $paymentMethod?->name ?? '選択してください' }}
           <span class="fake-select__arrow">▼</span>
         </a>
         @error('payment_method')
-        <p class="error">{{ $message }}</p>
+          <p class="purchase-form__error">{{ $message }}</p>
         @enderror
       </section>
       <section class="purchase-section  purchase-section--address">
@@ -38,7 +38,7 @@
         </div>
 
         @php
-        $postalCode = session("postal_code_($product->id)", $user->postal_code);
+        $postalCode = session("postal_code_{$product->id}", $user->postal_code);
         $address = session("address_{$product->id}", $user->address);
         $building = session("building_{$product->id}", $user->building);
         @endphp
@@ -49,7 +49,7 @@
         </div>
         <p class="purchase-address__address">{{ $address }} {{ $building ?? '' }}</p>
         @error('address')
-        <p class="error">{{ $message }}</p>
+        <p class="purchase-form__error">{{ $message }}</p>
         @enderror
       </section>
     </div>

@@ -57,7 +57,6 @@
   font-size: 18px;
   margin-bottom: 5px;
   display: flex;
-  flex-direction: flex-start;
 }
 
 .profile-form__input {
@@ -81,3 +80,6 @@
   margin-top: 30px;
 }
 
+.edit-form__error {
+  font-size: 16px;
+}

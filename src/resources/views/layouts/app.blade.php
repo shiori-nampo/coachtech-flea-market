@@ -12,41 +12,38 @@
   <div class="app">
     <header class="header">
       <div class="header__inner">
-      <a href="{{ route('items.index') }}">
-      <img src="{{ asset('images/logo.png') }}"/>
-      </a>
-
-      @if (!Route::is('register') && !Route::is('login'))
-      @auth
-      <form class="search-form" action="{{ route('items.index') }}" method="get">
-        @csrf
-        <input class="search-form__input" type="text" name="keyword" placeholder="なにをお探しですか？" value="{{ request('keyword') }}">
-        <input type="hidden" name="tab" value="{{ request('tab'. 'all') }}">
-      </form>
-      <form action="/logout" method="post">
-        @csrf
-        <button class="logout__link header__nav" type="submit">ログアウト</button>
-      </form>
-      <a class="mypage__link header__nav" href="{{ route('mypage') }}">マイページ</a>
-      <div class="header-sell">
-        <a class="sell__link header__nav" href="{{ route('items.sell') }}">出品</a>
-      </div>
+        <a href="{{ route('items.index') }}">
+          <img src="{{ asset('images/logo.png') }}"/>
+        </a>
+        @if (!Route::is('register') && !Route::is('login'))
+        @auth
+        <form class="search-form" action="{{ route('items.index') }}" method="get">
+          <input class="search-form__input" type="text" name="keyword" placeholder="なにをお探しですか？" value="{{ request('keyword') }}">
+          <input type="hidden" name="page" value="{{ request('page', 'all') }}">
+        </form>
+        <form action="/logout" method="post">
+          @csrf
+          <button class="logout__link header__nav" type="submit">ログアウト</button>
+        </form>
+        <a class="mypage__link header__nav" href="{{ route('mypage') }}">マイページ</a>
+        <div class="header-sell">
+          <a class="sell__link header__nav" href="{{ route('items.sell') }}">出品</a>
+        </div>
       @endauth
 
       @guest
       <form class="search-form" action="{{ route('items.index') }}" method="get">
-        @csrf
         <input class="search-form__input" type="text" name="keyword" placeholder="なにをお探しですか？">
-        <input type="hidden" name="tab" value="{{ request('tab') }}">
+        <input type="hidden" name="page" value="{{ request('page') }}">
       </form>
-        <a class="login__link header__nav" href="{{ route('login') }}">ログイン</a>
-        <a class="mypage__link header__nav" href="{{ route('login') }}">マイページ</a>
+      <a class="login__link header__nav" href="{{ route('login') }}">ログイン</a>
+      <a class="mypage__link header__nav" href="{{ route('login') }}">マイページ</a>
       <div class="header-sell">
-      <a class="sell__link header__nav" href="{{ route('login') }}">出品</a>
+        <a class="sell__link header__nav" href="{{ route('login') }}">出品</a>
       </div>
       @endguest
       @endif
-    </div>
+      </div>
     </header>
     @yield('content')
   </div>

@@ -19,7 +19,7 @@ use App\Http\Controllers\ProfileController;
 
 Route::get('/',[ProductController::class,'index'])->name('items.index');
 
-Route::get('/products/{product}',[ProductController::class,'show'])->name('items.detail');
+Route::get('/item/{item_id}',[ProductController::class,'show'])->name('items.detail');
 
 
 Route::middleware('auth')->get('/verify', function () {
@@ -30,25 +30,25 @@ Route::middleware('auth')->get('/verify', function () {
 
 Route::middleware('auth','verified')->group(function () {
 
-    Route::post('/products/{product}/favorite',[ProductController::class,'toggleFavorite'])->name('products.toggleFavorite');
+    Route::post('/item/favorite/{item_id}',[ProductController::class,'toggleFavorite'])->name('items.toggleFavorite');
 
-    Route::post('/products/{product}/comments',[CommentController::class,'store'])->name('comments.store');
+    Route::post('/item/comments/{item_id}',[CommentController::class,'store'])->name('comments.store');
 
-    Route::get('/purchase/{product}', [PurchaseController::class,'show'])->name('purchase.show');
+    Route::get('/purchase/{item_id}', [PurchaseController::class,'show'])->name('purchase.show');
 
-    Route::get('/purchase/{product}/payment',[PurchaseController::class,'showPayment'])->name('purchase.payment');
+    Route::get('/purchase/payment/{item_id}',[PurchaseController::class,'showPayment'])->name('purchase.payment');
 
-    Route::patch('/purchase/{product}/payment',[PurchaseController::class,'updatePayment'])->name('purchase.payment.update');
+    Route::patch('/purchase/payment/{item_id}',[PurchaseController::class,'updatePayment'])->name('purchase.payment.update');
 
-    Route::post('/purchase/{product}',[PurchaseController::class,'store'])->name('purchase.store');
+    Route::post('/purchase/{item_id}',[PurchaseController::class,'store'])->name('purchase.store');
 
-    Route::get('/purchase/{product}/success',
+    Route::get('/purchase/success/{item_id}',
     [PurchaseController::class,'success'])->name('purchase.success');
 
-    Route::get('/purchase/{product}/address',[PurchaseController::class,'showAddressForm'])
+    Route::get('/purchase/address/{item_id}',[PurchaseController::class,'showAddressForm'])
     ->name('purchase.address');
 
-    Route::post('/purchase/{product}/address',[PurchaseController::class,'updateAddress'])
+    Route::post('/purchase/address/{item_id}',[PurchaseController::class,'updateAddress'])
     ->name('purchase.address.update');
 
     Route::get('/mypage',[ProfileController::class,'mypage'])

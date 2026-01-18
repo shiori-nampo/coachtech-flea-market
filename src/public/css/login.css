@@ -12,7 +12,6 @@
 
 .login-form__inner {
   width: 100%;
-  min-width: 300px;
   max-width: 500px;
 }
 
@@ -52,4 +51,8 @@
   color: #43A4F3;
   margin-top: 24px;
   text-decoration: none;
+}
+
+.login-form__error {
+  font-size: 16px;
 }

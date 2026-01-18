@@ -8,10 +8,17 @@ use App\Models\Product;
 use App\Models\User;
 use App\Models\Condition;
 use App\Models\Favorite;
+use Database\Seeders\ConditionSeeder;
 
 class ProductIndexTest extends TestCase
 {
     use RefreshDatabase;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->seed(ConditionSeeder::class);
+    }
 
     public function test_product_index_displays_all_products()
     {
@@ -22,7 +29,7 @@ class ProductIndexTest extends TestCase
 
     public function test_sold_products_display_sold_label()
     {
-        $condition = Condition::factory()->create();
+        $condition = Condition::where('name','良好')->first();
 
         Product::factory()->create([
             'condition_id' => $condition->id,
@@ -31,15 +38,19 @@ class ProductIndexTest extends TestCase
 
         $response = $this->get('/');
 
-        $response->assertSee('Sold');
+        $response->assertSee('sold');
     }
 
     public function test_own_products_are_not_displayed_in_product_index()
     {
+
         $user = User::factory()->create();
+
+        $condition = Condition::where('name','良好')->first();
 
         $ownProduct = Product::factory()->create([
             'user_id' => $user->id,
+            'condition_id' => $condition->id,
             'name' => '自分の商品',
         ]);
 
@@ -106,7 +117,7 @@ class ProductIndexTest extends TestCase
 
         $response = $this->get('/?tab=mylist');
 
-        $response->assertSee('Sold');
+        $response->assertSee('sold');
     }
 
 
@@ -120,7 +131,7 @@ class ProductIndexTest extends TestCase
 
     public function test_products_can_be_searched_by_partial_name()
     {
-        $condition = Condition::factory()->create();
+        $condition = Condition::where('name','良好')->first();
 
         Product::factory()->create([
             'name' => '写真集',
@@ -146,7 +157,7 @@ class ProductIndexTest extends TestCase
         $user = User::factory()->create();
         $this->actingAs($user);
 
-        $condition = Condition::factory()->create();
+        $condition = Condition::where('name','良好')->first();
 
         $picture = Product::factory()->create([
             'name' => '写真集',

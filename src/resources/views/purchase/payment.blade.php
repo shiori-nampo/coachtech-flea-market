@@ -7,7 +7,7 @@
 
 
 @section('content')
-<form class="payment-form" action="{{ route('purchase.payment.update',$product) }}" method="post">
+<form class="payment-form" action="{{ route('purchase.payment.update',$product->id) }}" method="post">
   @csrf
   @method('PATCH')
   <div class="payment-content">
@@ -28,30 +28,19 @@
         <select
         class="payment-payment__select"
         name="payment_method_id"
-        id="payment-method-select"
-    >
-        <option value="" disabled {{ old('payment_method_id') === null ? 'selected' : '' }} hidden>
-            選択してください
-        </option>
-
-        @foreach($paymentMethods as $method)
-            <option
-                value="{{ $method->id }}"
-                {{ old('payment_method_id') == $method->id ? 'selected' : '' }}
-            >
+        id="payment-method-select">
+          <option value="" disabled {{ old('payment_method_id') === null ? 'selected' : '' }} hidden>選択してください
+          </option>
+          @foreach($paymentMethods as $method)
+          <option value="{{ $method->id }}"
+                {{ old('payment_method_id') == $method->id ? 'selected' : '' }}>
                 {{ $method->name }}
-            </option>
-        @endforeach
-    </select>
-
-    <span class="select-arrow">▼</span>
-    </div>
-
-        @error('payment_method_id')
-        <p class="error">{{ $message }}</p>
-        @enderror
+          </option>
+          @endforeach
+        </select>
+        <span class="select-arrow">▼</span>
+      </div>
       </section>
-
       <section class="payment-section  payment-section--address">
         <div class="payment-address__header">
           <h2 class="payment-title">配送先</h2>
@@ -62,9 +51,6 @@
           <p class="payment-address__postal-code">{{ preg_replace('/(\d{3})(\d{4})/','$1-$2', $user->postal_code) }}</p>
         </div>
         <p class="payment-address__address">{{ $user->address }} {{ $user->building ?? '' }}</p>
-        @error('address')
-        <p class="error">{{ $message }}</p>
-        @enderror
       </section>
     </div>
     <div class="payment-right">

@@ -16,6 +16,8 @@ use App\Http\Responses\RegisterResponse;
 use App\Http\Responses\LoginResponse;
 use Laravel\Fortify\Contracts\RegisterResponse as RegisterResponseContract;
 use Laravel\Fortify\Contracts\LoginResponse as LoginResponseContract;
+use Laravel\Fortify\Contracts\VerifyEmailResponse as VerifyEmailResponseContract;
+use App\Http\Responses\VerifyEmailResponse;
 
 
 class FortifyServiceProvider extends ServiceProvider
@@ -38,6 +40,11 @@ class FortifyServiceProvider extends ServiceProvider
         $this->app->singleton(
             FortifyLoginRequest::class,
             MyCustomLoginRequest::class
+        );
+
+        $this->app->singleton(
+            VerifyEmailResponseContract::class,
+            VerifyEmailResponse::class
         );
     }
 
@@ -63,18 +70,6 @@ class FortifyServiceProvider extends ServiceProvider
         $email = (string) $request->email;
 
         return Limit::perMinute(10)->by($email . $request->ip());
-        });
-
-
-        Fortify::authenticateUsing(function (Request $request) {
-
-        if (Auth::attempt($request->only('email','password'))) {
-            return Auth::user();
-        }
-
-        throw ValidationException::withMessages([
-            'email' => 'ログイン情報が登録されていません',
-        ]);
         });
 
         Fortify::verifyEmailView(function () {
