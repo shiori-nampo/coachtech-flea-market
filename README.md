@@ -27,9 +27,9 @@ mysql:
 DB_CONNECTION=mysql
 DB_HOST=mysql
 DB_PORT=3306
-DB_DATABASE=flea_db
-DB_USERNAME=flea_user
-DB_PASSWORD=flea_pass
+DB_DATABASE=flea_clone
+DB_USERNAME=clone_user
+DB_PASSWORD=clone_pass
 ```
 5. アプリケーションキーの作成
 ```bash
@@ -57,6 +57,8 @@ php artisan db:seed
 - Laravel8.83.29
 - MySQL8.0.44
 - MailHog(メール認証用)
+
+
 
 ## ER図
 ![doc](er_diagram.png)
@@ -87,3 +89,9 @@ MAIL_FROM_NAME="coachtech-flea-market"
 
 動作確認は、新規ユーザー登録を行なってください。
 
+
+### Stripe テストキー設定（クローン環境用）
+
+`.env` に以下を追加してください:
+
+※ your_stripe_test_key_here と your_stripe_test_secret_here は Stripe ダッシュボードで取得したテストキーに置き換えてください。
