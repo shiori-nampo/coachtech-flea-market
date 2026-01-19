@@ -51,6 +51,11 @@ php artisan storage:link
 php artisan db:seed
 ```
 
+9. Stripe PHPライブラリのインストール
+```bash
+composer require stripe/stripe-php
+```
+
 ## 使用技術(実行環境)
 - Docker / Docker Compose
 - PHP8.1.33
