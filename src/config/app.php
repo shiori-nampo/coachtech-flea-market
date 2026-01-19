@@ -54,6 +54,8 @@ return [
 
     'url' => env('APP_URL', 'http://localhost'),
 
+    'mailhog_url' => env('MAILHOG_URL','http://localhost:8025'),
+
     'asset_url' => env('ASSET_URL', null),
 
     /*

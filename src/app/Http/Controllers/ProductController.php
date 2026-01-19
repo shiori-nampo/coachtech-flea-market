@@ -115,18 +115,5 @@ class ProductController extends Controller
         return redirect()->route('items.index');
     }
 
-    public function detail($item_id)
-    {
-        $product = Product::with(['favorites','comments','categories','condition'])->findOrFail($item_id);
-
-        $isFavorited = false;
-
-        if (auth()->check()) {
-            $isFavorited = $product->favorites->contains('user_id',auth()->id());
-        }
-
-        return view ('items.detail', compact('product','isFavorited'));
-    }
-
 
 }

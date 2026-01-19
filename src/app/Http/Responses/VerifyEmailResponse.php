@@ -8,6 +8,6 @@ class VerifyEmailResponse implements VerifyEmailResponseContract
 {
     public function toResponse($request)
     {
-      return redirect()->route('profile.edit');
+        return redirect()->route('profile.edit');
     }
 }

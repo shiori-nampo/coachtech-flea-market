@@ -25,6 +25,7 @@ header {
 .header__inner a img {
   max-width: 350px;
   height: auto;
+  margin-left: 20px;
 }
 
 .search-form {
@@ -35,12 +36,15 @@ header {
 
 .search-form__input {
   background: #fff;
-  width: 65%;
-  padding: 8px 12px;
+  width: 100%;
+  padding: 7px 0px 7px 20px;
   border-radius: 4px;
   margin-left: 32px;
-  max-width: 400px;
-  min-width: 120px;
+  font-size: 20px;
+}
+
+.search-form__input::placeholder {
+  color: #3b3d40;
 }
 
 .header__nav {

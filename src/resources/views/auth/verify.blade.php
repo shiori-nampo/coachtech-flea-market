@@ -10,7 +10,7 @@
 <div class="email-content">
   <h1 class="email-title">
     登録していただいたメールアドレスに認証メールを送付しました。<br>メール認証を完了してください。</h1>
-    <a class="email-content__link" href="{{ route('verification.notice') }}">認証はこちらから</a>
+    <a class="email-content__link" href="{{ config('app.mailhog_url') }}" target="_blank" rel="noopener">認証はこちらから</a>
 
     @if (session('status') === 'verification-link-sent')
     <p class="email-success">

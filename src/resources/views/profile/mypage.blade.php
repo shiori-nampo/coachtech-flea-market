@@ -10,7 +10,11 @@
 <div class="mypage-content">
   <div class="mypage-content__header">
     <div class="mypage-content__user">
+      @if ($user->profile_image)
       <img class="mypage-content__image" src="{{ $user->profile_image ? asset('storage/'.$user->profile_image) : asset('images/no-image.png') }}" alt="">
+      @else
+        <div class="mypage-content__image mypage-content__image--empty"></div>
+      @endif
       <h1 class="mypage-content__name">{{ $user->name }}</h1>
     </div>
     <a class="mypage-content__link" href="{{ route('profile.edit') }}">プロフィールを編集</a>

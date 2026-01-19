@@ -13,7 +13,7 @@
   <div class="payment-content">
     <div class="payment-left">
       <section class="payment-section payment-section--product">
-        <img class="payment-product__image" src="{{ $product->image }}" alt="{{ $product->name }}">
+        <img class="payment-product__image" src="{{ $product->image_url }}" alt="{{ $product->name }}">
         <div class="payment-product__info">
           <h1 class="payment-product__name">{{ $product->name }}</h1>
           <div class="payment-product__prices">

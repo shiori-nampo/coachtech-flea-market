@@ -20,7 +20,6 @@ class DeliveryAddressTest extends TestCase
     {
         parent::setUp();
         $this->seed(ConditionSeeder::class);
-        parent::setUp();
         $this->seed(PaymentMethodSeeder::class);
     }
 

@@ -8,7 +8,7 @@
 @section('content')
 <div class="detail-content">
   <div class="detail-content__inner">
-    <img class="detail-image" src="{{ $product->image }}" alt="{{ $product->name }}">
+    <img class="detail-image" src="{{ $product->image_url }}" alt="{{ $product->name }}">
     <div class="detail-items">
       <h1 class="detail-items__name">{{ $product->name }}</h1>
       <p class="detail-items__brand">{{ $product->brand_name }}</p>
@@ -55,7 +55,11 @@
     @foreach($product->comments as $comment)
     <div class="comment">
       <div class="comment-user">
-        <img class="comment-user__image" src="{{ $comment->user->profile_image ? asset('storage/'.$comment->user->profile_image) : asset('images/no-image.png') }}" alt="{{ $comment->user->name }}">
+        @if ($comment->user->profile_image)
+        <img class="comment-user__image" src="{{ $comment->user->profile_image ? asset('storage/'.$comment->user->profile_image) : asset('images/no-image.png') }}" alt="">
+        @else
+        <div class="comment-user__image comment-user__image--empty"></div>
+        @endif
         <span class="comment-user__name">{{ $comment->user->name }}</span>
       </div>
       <p class="comment-text">{{ $comment->content }}</p>

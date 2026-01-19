@@ -11,7 +11,7 @@
   <div class="purchase-content">
     <div class="purchase-left">
       <section class="purchase-section purchase-section--product">
-        <img class="purchase-product__image" src="{{ $product->image }}" alt="{{ $product->name }}">
+        <img class="purchase-product__image" src="{{ $product->image_url }}" alt="{{ $product->name }}">
         <div class="purchase-product__info">
           <h1 class="purchase-product__name">{{ $product->name }}</h1>
           <div class="purchase-product__prices">

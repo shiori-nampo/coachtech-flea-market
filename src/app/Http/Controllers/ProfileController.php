@@ -3,11 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\User;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;
 use App\Models\Product;
-use App\Models\Order;
 use App\Http\Requests\ProfileRequest;
 
 class ProfileController extends Controller

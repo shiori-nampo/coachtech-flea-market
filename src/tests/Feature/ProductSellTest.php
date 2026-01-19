@@ -23,9 +23,7 @@ class ProductSellTest extends TestCase
     {
         parent::setUp();
         $this->seed(ConditionSeeder::class);
-        parent::setUp();
         $this->seed(PaymentMethodSeeder::class);
-        parent::setUp();
         $this->seed(CategorySeeder::class);
     }
 

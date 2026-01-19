@@ -22,9 +22,12 @@
   height: 120px;
   border-radius: 50%;
   object-fit: cover;
-  background: #ddd;
   margin-right: 50px;
   margin-left: 180px;
+}
+
+.mypage-content__image--empty {
+  background-color: #d9d9d9;
 }
 
 .mypage-content__name {

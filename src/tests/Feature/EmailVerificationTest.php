@@ -47,7 +47,7 @@ class EmailVerificationTest extends TestCase
         $response->assertStatus(200);
 
         $response->assertSee('認証はこちらから');
-        $response->assertSee(route('verification.send'));
+        $response->assertSee(config('app.mailhog_url'));
 
     }
 

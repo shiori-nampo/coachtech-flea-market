@@ -16,7 +16,7 @@
     <div class="product-group">
       <a href="{{ route('items.detail', ['item_id' => $product->id]) }}" class="product-group__link">
         <img class="product-group__image"
-          src="{{ $product->image }}" alt= "{{ $product->name }}">
+          src="{{ $product->image_url }}" alt= "{{ $product->name }}">
         <p class="product-group__name">{{ $product->name }}</p>
         @if($product->status === 'sold')
           <span class="sold-badge">sold</span>

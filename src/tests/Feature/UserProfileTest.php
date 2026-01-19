@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\Product;
 use App\Models\Order;
 use App\Models\Condition;
+use App\Models\PaymentMethod;
 use Database\Seeders\ConditionSeeder;
 use Database\Seeders\PaymentMethodSeeder;
 
@@ -21,7 +22,6 @@ class UserProfileTest extends TestCase
     {
         parent::setUp();
         $this->seed(ConditionSeeder::class);
-        parent::setUp();
         $this->seed(PaymentMethodSeeder::class);
     }
 
@@ -68,7 +68,7 @@ class UserProfileTest extends TestCase
 
         $this->actingAs($user);
 
-        $response = $this->get(route('mypage',['tab' => 'sell']));
+        $response = $this->get(route('mypage',['page' => 'sell']));
 
         $response->assertStatus(200);
 
@@ -78,21 +78,25 @@ class UserProfileTest extends TestCase
     public function test_purchased_products_are_displayed()
     {
 
-        $user = User::factory()->create();
+        $seller = User::factory()->create();
+        $buyer = User::factory()->create();
+
+        $paymentMethod = PaymentMethod::first();
 
         $product = Product::factory()->create([
-            'user_id' => $user->id,
+            'user_id' => $seller->id,
             'name' => '購入テスト商品',
         ]);
 
         Order::factory()->create([
-            'user_id' => $user->id,
+            'user_id' => $buyer->id,
             'product_id' => $product->id,
+            'payment_method_id' => $paymentMethod->id,
         ]);
 
-        $this->actingAs($user);
+        $this->actingAs($buyer);
 
-        $response = $this->get(route('mypage', ['tab' => 'buy']));
+        $response = $this->get(route('mypage', ['page' => 'buy']));
 
         $response->assertStatus(200);
 
