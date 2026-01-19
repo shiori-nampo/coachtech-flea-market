@@ -12,7 +12,11 @@
     <div class="detail-items">
       <h1 class="detail-items__name">{{ $product->name }}</h1>
       <p class="detail-items__brand">{{ $product->brand_name }}</p>
-      <p class="detail-items__price">¥{{ number_format($product->price) }}</p>
+      <p class="detail-items__price">
+        <span class="detail-items__yen">¥</span>
+        {{ number_format($product->price) }}
+        <span class="detail-items__tax">(税込)</span>
+      </p>
     <div class="detail-icons">
       <form action="{{ route('items.toggleFavorite',['item_id' => $product->id]) }}" method="post">
         @csrf

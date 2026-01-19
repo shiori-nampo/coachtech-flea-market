@@ -15,7 +15,7 @@
         <a href="{{ route('items.index') }}">
           <img src="{{ asset('images/logo.png') }}"/>
         </a>
-        @if (!Route::is('register') && !Route::is('login'))
+        @if (!Route::is('register') && !Route::is('login') && !Route::is('verification.notice'))
         @auth
         <form class="search-form" action="{{ route('items.index') }}" method="get">
           <input class="search-form__input" type="text" name="keyword" placeholder="なにをお探しですか？" value="{{ request('keyword') }}">

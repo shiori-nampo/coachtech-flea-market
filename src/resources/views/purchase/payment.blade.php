@@ -48,9 +48,9 @@
         </div>
         <div class="payment-addresses">
           <span class="payment-address__post">〒</span>
-          <p class="payment-address__postal-code">{{ preg_replace('/(\d{3})(\d{4})/','$1-$2', $user->postal_code) }}</p>
+          <p class="payment-address__postal-code">{{ preg_replace('/(\d{3})(\d{4})/','$1-$2', $postalCode) }}</p>
         </div>
-        <p class="payment-address__address">{{ $user->address }} {{ $user->building ?? '' }}</p>
+        <p class="payment-address__address">{{ $address }} {{ $building ?? '' }}</p>
       </section>
     </div>
     <div class="payment-right">

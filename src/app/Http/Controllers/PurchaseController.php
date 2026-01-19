@@ -40,10 +40,17 @@ use Illuminate\Support\Facades\Auth;
         $product = Product::findOrFail($item_id);
         $paymentMethods = PaymentMethod::all();
 
+        $postalCode = session("postal_code_{$product->id}") ?? $user->postal_code;
+        $address = session("address_{$product->id}") ?? $user->address;
+        $building = session("building_{$product->id}") ?? $user->building;
+
         return view('purchase.payment',compact(
             'product',
             'paymentMethods',
-            'user'
+            'user',
+            'postalCode',
+            'address',
+            'building'
         ));
     }
 
